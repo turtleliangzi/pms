@@ -1,0 +1,15 @@
+'use strict';
+
+/**
+ * Controller of the demand
+ */
+
+app.controller('DemandProjectCtrl', function($scope, $stateParams, Project) {
+    $scope.bgs = Array('success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary');
+    Project.myProject($scope);
+
+});
+
+app.controller('DemandCtrl', function($scope, $stateParams, Demand) {
+
+})

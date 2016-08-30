@@ -1,0 +1,63 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{project.name}}-进展</h3>
+</div>
+<div class="stepbox">
+  <div class="steptaks">
+    <span ng-if="project.approve_status >= 0" class="step_on">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <b>项目申请</b>
+    </span>
+    <span ng-if="project.approve_status >= 1" class="step_on">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <b>审核通过</b>
+    </span>
+    <span ng-if="project.approve_status < 1" class="step_off">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>审核通过</b>
+    </span>
+    <span ng-if="project.approve_status >= 2" class="step_on">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <b>已分配</b>
+    </span>
+    <span ng-if="project.approve_status < 2" class="step_off">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>已分配</b>
+    </span>
+    <span class="step_on" ng-if="project.approve_status >= 3">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <b>开发中</b>
+    </span>
+    <span class="step_off" ng-if="project.approve_status < 3">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>开发中</b>
+    </span>
+    <span class="step_on" ng-if="project.approve_status >= 4">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <b>已上线</b>
+    </span>
+    <span class="step_off" ng-if="project.approve_status < 4">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>已上线</b>
+    </span>
+    <span class="step_on" ng-if="project.approve_status >= 5">
+      <i class="fa fa-check icon-off icon-on"></i>
+      <b>已结项</b>
+    </span>
+    <span class="step_off" ng-if="project.approve_status < 5">
+      <i class="fa fa-check icon-off"></i>
+      <b>已结项</b>
+    </span>
+  </div>
+</div>
+<div class="project-info">
+  <p><b>项目信息</b></p>
+  <div>
+    <span class="col-md-4">项目阶段：开发中</span>
+    <span class="col-md-4">项目阶段：开发中</span>
+    <span class="col-md-4">项目阶段：开发中</span>
+    <span class="col-md-4">项目阶段：开发中</span>
+    <span class="col-md-4">项目阶段：开发中</span>
+    <span class="col-md-4">项目阶段：开发中</span>
+    <span class="col-md-4">项目阶段：开发中</span>
+  </div>
+</div>

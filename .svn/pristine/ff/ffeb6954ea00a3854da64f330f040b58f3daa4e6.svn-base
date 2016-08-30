@@ -1,0 +1,24 @@
+'use strict';
+
+/**
+ * Controller of the permission
+ */
+
+app.controller('PermissionAssignCtrl', function($scope, $stateParams, Permission) {
+
+});
+app.controller('PermissionGroupCtrl', function($scope, $stateParams, Permission) {
+    $scope.group = $stateParams.group;
+    var permission = new Array();
+    permission['all'] = "所有权限";
+    permission['add_department'] = "新增部门";
+    permission['add_project'] = "新增项目";
+    permission['audit_project'] = "审核项目";
+    permission['add_group'] = "新增用户组";
+    permission['assign_permission'] = "分配权限";
+    $scope.addGroup = function () {
+        alert($scope.group.permission);
+    }
+
+});
+

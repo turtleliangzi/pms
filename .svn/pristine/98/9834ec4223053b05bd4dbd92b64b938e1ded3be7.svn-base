@@ -1,0 +1,25 @@
+'use strict';
+
+/**
+ * Controller of the company
+ */
+
+app.controller('CompanyCtrl', function($scope, $stateParams, Company) {
+    $scope.company = window.localStorage.getItem('company');
+    $scope.uid = window.localStorage.getItem('uid');
+    if ($scope.company !== "null") {
+        Company.info($scope, $scope.company);
+    }
+
+    $scope.join = $stateParams.join;
+
+    $scope.addCompany = function () {
+        alert($scope.name);
+    }
+
+    $scope.joinCompany = function () {
+        alert($scope.join.code);
+    }
+
+});
+

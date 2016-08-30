@@ -1,0 +1,36 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">项目审核</h3>
+</div>
+<ul class="nav nav-sm nav-tabs" ui-nav>
+  <li class="active">
+    <a href="#/ui/project/project_audit">Pages</a>
+  </li>
+  <li>
+    <a href>Components <span class="badge bg-warning badge-xs">5</span></a>
+  </li>
+  <li>
+    <a >UI Kits</a>
+  </li>
+</ul>
+<div class="p b-a no-b-t bg-white m-b">
+  <table  class="table  table-striped">
+    <thead>
+      <tr>
+        <th>first name</th>
+        <th>last name</th>
+        <th>birth date</th>
+        <th>balance</th>
+        <th>email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in rowCollectionBasic" st-select-row="row">
+        <td>{{row.firstName}}</td>
+        <td>{{row.lastName}}</td>
+        <td>{{row.birthDate}}</td>
+        <td>{{row.balance}}</td>
+        <td>{{row.email}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,8 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">需求管理</h3>
+</div>
+<div class="p-md">
+    <a ng-repeat="project in projects" class="btn btn-icon btn-rounded btn-{{bgs[$index]}} add-department" ui-sref="ui.demand.demand-manage({project_id:project.id, kind:1})">
+        {{project.name}}
+    </a>
+</div>

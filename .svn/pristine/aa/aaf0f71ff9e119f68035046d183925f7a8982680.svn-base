@@ -1,0 +1,38 @@
+'use strict';
+
+/**
+ * Controller of the project
+ */
+
+app.controller('MyProjectCtrl', function($scope, $stateParams, Project) {
+    $scope.project = $stateParams.project;
+
+    $scope.bgs = Array('success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary');
+
+    Project.myProject($scope);
+
+    $scope.addProject = function () {
+        if ($scope.project === undefined) {
+            return;
+        } else {
+            if ($scope.project.project_name === undefined) {
+                return;
+            }
+            if ($scope.project.project_type === undefined) {
+                return;
+            }
+            if ($scope.project.project_range === undefined) {
+                return;
+            }
+            if ($scope.project.project_desc === undefined) {
+                return;
+            }
+            if ($scope.project.etimated_time === undefined) {
+                return;
+            }
+        }
+        Project.addProject($scope, $scope.project);
+    }
+
+});
+

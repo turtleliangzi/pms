@@ -1,0 +1,91 @@
+.department {
+    height:100px;
+    width:100px;
+    text-align:center;
+    border-radius:100px;
+    /* line-height:100px; */
+    padding-top:40px;
+    color:#fff;
+    font-weight:bold;
+    display:inline-block;
+    margin-left:20px;
+}
+.add-department {
+    height:100px;
+    width:100px;
+    border-radius:100px;
+    line-height:100px;
+    margin-left:20px;
+}
+
+.kanban {
+    height:100%;
+    border-radius:5px;
+    background-color:#eee;
+    box-shadow: 2px 2px 3px #ddd;
+    display:table;
+    margin-right:10px;
+    width:280px;
+    float:left;
+}
+.kanban-header {
+    width:100%;
+    height:40px;
+    font-size:15px;
+    font-weight:700;
+    line-height:40px;
+    padding-left:10px;
+
+
+}
+.add-task {
+    margin-top:10px;
+}
+.btn-add {
+    background-color:#eee;
+    border:0px;
+}
+.btn-add-icon {
+    border:1px solid #2772ee;
+    margin-right:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:6px;
+    padding-right:6px;
+}
+.task-list {
+    background-color:#fff;
+    width:100%;
+    border-radius:0px;
+    padding:8px;
+    display:table;
+}
+.task-name {
+    width:100%;
+    font-size:14px;
+    color:#000;
+    font-weight:bold;
+}
+.task-sign {
+    width:100%;
+    padding:0px;
+    display:table;
+    margin-top:10px;
+    margin-bottom:5px;
+    list-style-type:circle
+}
+.task-sign li {
+   height:25px;
+   line-height:25px;
+   background-color:#eee;
+   display:block;
+   float:left;
+   margin-right:5px;
+   font-size:12px;
+   padding-left:10px;
+   padding-right:10px;
+   border-radius:2px;
+}
+.task-default {
+    border-left:8px solid #ddd;
+}

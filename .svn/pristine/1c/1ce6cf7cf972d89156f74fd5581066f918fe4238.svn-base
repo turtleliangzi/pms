@@ -1,0 +1,30 @@
+.department {
+    height:100px;
+    width:100px;
+    text-align:center;
+    border-radius:100px;
+    /* line-height:100px; */
+    padding-top:40px;
+    color:#fff;
+    font-weight:bold;
+    display:inline-block;
+    margin-left:20px;
+}
+.add-department {
+    height:100px;
+    width:100px;
+    border-radius:100px;
+    line-height:100px;
+    margin-left:20px;
+}
+
+.kanban {
+    height:100%;
+    border-radius:5px;
+    background-color:#eee;
+    box-shadow: 2px 2px 3px #eee;
+    display:table;
+    margin-right:10px;
+    width:280px;
+    float:left;
+}

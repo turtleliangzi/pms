@@ -1,0 +1,4 @@
+app.controller('SignInCtrl', function($scope, $stateParams, Restangular) {
+
+});
+

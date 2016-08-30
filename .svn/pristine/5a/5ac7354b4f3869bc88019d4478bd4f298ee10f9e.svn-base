@@ -1,0 +1,99 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{project.name}}-进展</h3>
+</div>
+<div class="stepbox">
+  <div class="steptaks">
+    <span ng-if="project.approve_status >= 0" class="step_on">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <p>项目申请</p>
+      <p>2016-12-03</p>
+    </span>
+    <span ng-if="project.approve_status >= 1" class="step_on">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <b>审核通过</b>
+    </span>
+    <span ng-if="project.approve_status < 1" class="step_off">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>审核通过</b>
+    </span>
+    <span ng-if="project.approve_status >= 2" class="step_on">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <b>已分配</b>
+    </span>
+    <span ng-if="project.approve_status < 2" class="step_off">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>已分配</b>
+    </span>
+    <span class="step_on" ng-if="project.approve_status >= 3">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <b>开发中</b>
+    </span>
+    <span class="step_off" ng-if="project.approve_status < 3">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>开发中</b>
+    </span>
+    <span class="step_on" ng-if="project.approve_status >= 4">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <b>已上线</b>
+    </span>
+    <span class="step_off" ng-if="project.approve_status < 4">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>已上线</b>
+    </span>
+    <span class="step_on" ng-if="project.approve_status >= 5">
+      <i class="fa fa-check icon-off icon-on"></i>
+      <b>已结项</b>
+    </span>
+    <span class="step_off" ng-if="project.approve_status < 5">
+      <i class="fa fa-check icon-off"></i>
+      <b>已结项</b>
+    </span>
+  </div>
+</div>
+<div class="project-info">
+  <p><b>项目信息</b></p>
+  <div>
+    <span class="col-md-4" ng-if="project.approve_status == 0">项目阶段：项目申请中</span>
+    <span class="col-md-4" ng-if="project.approve_status == 1">项目阶段：审核通过</span>
+    <span class="col-md-4" ng-if="project.approve_status == 2">项目阶段：已分配</span>
+    <span class="col-md-4" ng-if="project.approve_status == 3">项目阶段：开发中</span>
+    <span class="col-md-4" ng-if="project.approve_status == 4">项目阶段：已上线</span>
+    <span class="col-md-4" ng-if="project.approve_status == 5">项目阶段：已结项</span>
+    <span class="col-md-4">预计用时：{{project.etimated_time}}</span>
+    <span class="col-md-4">实际用时：{{project.actual_time}}</span>
+    <span class="col-md-4">项目类型：{{project.type}}</span>
+    <span class="col-md-4">项目等级：{{project.range}}</span>
+    <span class="col-md-4">进展情况：<span class="text-success">正常</span></span>
+  </div>
+</div>
+<div class="project-goal">
+  <p><b>阶段目标</b></p>
+  <table  class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>阶段名称</th>
+        <th>开始时间</th>
+        <th>预计完成时间</th>
+        <th>实际完成时间</th>
+        <th>状态</th>
+        <th>进展状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="goal in goals">
+        <td>{{goal.name}}</td>
+        <td>{{goal.start_time}}</td>
+        <td class="text-warning">{{goal.etimated_end_time}}</td>
+        <td>{{goal.actual_end_time}}</td>
+        <td ng-if="goal.status == 0">未开始</td>
+        <td ng-if="goal.status == 1" class="text-info">进行中</td>
+        <td ng-if="goal.status == 2" class="text-info">测试中</td>
+        <td ng-if="goal.status == 3" class="text-success">已完成</td>
+        <td class="text-success"><i class="glyphicon glyphicon-arrow-right"></i>按时</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="project-danger">
+  <p><b>风险信息</b></p>
+</div>

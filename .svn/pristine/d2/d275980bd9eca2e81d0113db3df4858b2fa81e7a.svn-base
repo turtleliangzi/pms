@@ -1,0 +1,27 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{project.name}}-进展</h3>
+</div>
+<div class="stepbox">
+  <div class="steptaks">
+    <span class="step_on">
+      <i class="ti ti-angle-right icon-off icon-on"></i>
+      <b>项目申请</b>
+    </span>
+    <span class="step_off">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>审核通过</b>
+    </span>
+    <span class="step_off">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>开发中</b>
+    </span>
+    <span class="step_off">
+      <i class="ti ti-angle-right icon-off"></i>
+      <b>已上线</b>
+    </span>
+    <span class="step_off">
+      <i class="fa fa-check icon-off"></i>
+      <b>已结项</b>
+    </span>
+  </div>
+</div>

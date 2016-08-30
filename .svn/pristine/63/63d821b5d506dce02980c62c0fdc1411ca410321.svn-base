@@ -1,0 +1,31 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{company.name}}<span class="label bg-info pos-rlt m-r-xs" style="font-size:12px;margin-left:10px;"><b class="arrow left b-info pull-in"></b>{{company.code}}</span></h3>
+</div>
+<div class="p-md">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-success b-t-4x">
+        <div class="panel-heading b-b b-light">
+          Heading
+        </div>
+        <div class="panel-body">
+          Panel Body
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-success b-t-4x">
+        <div class="panel-heading">
+          成员数
+        </div>
+        <div class="panel-body">
+          2
+        </div>
+        <div class="panel-footer">
+          更新于2016/03/13
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

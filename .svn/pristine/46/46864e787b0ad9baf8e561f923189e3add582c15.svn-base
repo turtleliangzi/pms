@@ -1,0 +1,13 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">所有部门</h3>
+</div>
+<div class="p-md">
+  <div class="bg-success department">技术部</div>
+  <div class="bg-info department">市场部</div>
+  <div class="bg-light department"><i class="glyphicon-plus text-2x"></i></div>
+</div>
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">你所在的部门</h3>
+</div>
+<div class="p-md">
+</div>

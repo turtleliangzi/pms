@@ -1,0 +1,36 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">项目审核</h3>
+</div>
+<ul class="nav nav-sm nav-tabs" ui-nav style="margin-top:10px;">
+  <li class="active">
+    <a href="#/ui/project/project_audit">未通过</a>
+  </li>
+  <li>
+    <a href>审核通过但未分配<span class="badge bg-warning badge-xs">5</span></a>
+  </li>
+  <li>
+    <a >已分配</a>
+  </li>
+</ul>
+<div class="p b-a no-b-t bg-white m-b">
+  <table  class="table  table-striped">
+    <thead>
+      <tr>
+        <th>项目名</th>
+        <th>项目类型</th>
+        <th>项目等级</th>
+        <th>申请人</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in projects" st-select-row="row">
+        <td>{{row.name}}</td>
+        <td>{{row.type}}</td>
+        <td>{{row.range}}</td>
+        <td>{{row.applicanter}}</td>
+        <td>审核</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

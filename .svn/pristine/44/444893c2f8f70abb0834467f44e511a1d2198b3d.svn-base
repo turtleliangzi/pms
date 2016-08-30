@@ -1,0 +1,12 @@
+'use strict';
+
+/**
+ * Controller of the company
+ */
+
+app.controller('CompanyCtrl', function($scope, $stateParams, Company) {
+    $scope.name = window.localStorage.getItem('name');
+    alert($scope.name);
+
+});
+

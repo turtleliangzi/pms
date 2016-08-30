@@ -1,0 +1,19 @@
+"use.strict";
+
+/*
+ * Permission Service
+ */
+
+
+app.factory("Permission", function (Restangular, $location, $alert, alertMsg) {
+    return {
+        addGroup: function ($scope, group) {
+            var permissionRest = Restangular.all('group/add');
+            permissionRest.post(group).then(function (response) {
+                alertMsg.alert(response, '');
+                $("#add").modal('hide');
+            })
+        },
+    }
+});
+

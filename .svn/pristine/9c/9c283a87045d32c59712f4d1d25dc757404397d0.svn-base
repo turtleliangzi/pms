@@ -1,0 +1,474 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{project.name}}-看板</h3>
+</div>
+<div style="padding:20px;height:70px;width:100%;position:relative">
+  <label>阶段目标:&nbsp;</label>
+  <button type="button" class="btn btn-default" placeholder="请选择阶段"  ng-model="selectedGoal" ng-change="changeGoal(selectedGoal)"  data-html="1" data-animation="am-flip-x"  ng-options="goal.id as goal.name for goal in goals" bs-select>
+    Action <span class="caret"></span>
+  </button>
+  <button class="btn btn-icon btn-default" data-toggle="modal" data-target="#addGoal"><i class="fa fa-plus"></i></button>
+  <span style="position:absolute;top:25px;right:20px;cursor:pointer" data-template="views/ui/project/project_member.html" data-animation="am-slide-right aside-open-backdrop" bs-aside="aside" data-html="true" data-container="body">
+    <i class="fa fa-users text-success text-lg"></i>&nbsp;{{memberLength}}人 
+  </span>
+  <!-- Modal -->
+  <form name="form" role="form" class="form-validation">
+    <div class="modal fade" id="addGoal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">新增阶段目标</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel-body" style="text-align:left">    
+              <div class="form-group">
+                <label>阶段名</label>
+                <input type="text" class="form-control" ng-model="goal.goal_name"  required >
+              </div>
+              <div class="form-group">
+                <label>权重</label>
+                <input type="text" class="form-control" ng-model="goal.goal_weight"  required  placeholder="0.3">
+              </div>
+              <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+                <label class="control-label">开始时间</label>
+                <input type="text" class="form-control" ng-model="goal.start_time" data-date-format="yyyy-MM-dd" data-date-type="string"  data-autoclose="true"  data-min-date="today" data-max-date="{{goal.etimated_end_time}}"  data-autoclose="1" name="date2" bs-datepicker>
+              </div>
+              <div class="form-group" ng-class="{'has-error': datepickerForm.date3.$invalid}">
+                <label class="control-label">预计结束时间</label>
+                <input type="text" class="form-control" ng-model="goal.etimated_end_time" data-date-format="yyyy-MM-dd" data-date-type="string"  data-autoclose="true"  data-min-date="{{goal.start_time}}" placement="top-left" useNative="true"  data-autoclose="1" name="date3" bs-datepicker>
+              </div>
+              <div class="form-group">
+                <label>执行顺序</label>
+                <input type="text" class="form-control" ng-model="goal.goal_order"  required  placeholder="1">
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="submit" class="btn btn-primary" ng-click="addGoal(project.id)">新建</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- Modal -->
+  <form name="form" role="form" class="form-validation">
+    <div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">新增项目成员</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel-body" style="text-align:left">    
+              <div class="form-group">
+                <label>成员邮箱</label>
+                <input type="email" class="form-control" ng-model="member.email"  required >
+              </div>
+              <div class="form-group">
+                <label>担任角色</label>
+                <input type="text" class="form-control" ng-model="member.project_role"  required  placeholder="">
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="submit" class="btn btn-primary" ng-click="addMember(project.id)">新增</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div style="width:100%;height:400px;padding:10px;">
+  <div class="kanban" >
+    <div class="kanban-header">
+      待处理
+    </div>
+    <div data-toggle="modal" data-target="#undoTask" ng-click="taskDetail(2)"  class="task-list task-default">
+      <div class="task-name">11111</div>
+      <ul class="task-sign">
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;2222
+        </li>
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;3333
+          
+        </li>
+      </ul>
+    </div>
+    <div data-toggle="modal" data-target="#undoTask" ng-click="taskDetail2(2)"  class="task-list task-default">
+      <div class="task-name">11111</div>
+      <ul class="task-sign">
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;2222
+        </li>
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;3333
+          
+        </li>
+      </ul>
+    </div>
+    <!-- <div data-toggle="modal" data-target="#undoTask" ng-click="taskDetail(task.id)" ng-if="task.priority == '较急'" class="task-list task-warning" ng-repeat="task in task_undo"> -->
+    <!--   <div class="task-name">{{task.name}}</div> -->
+    <!--   <ul class="task-sign"> -->
+    <!--     <li> -->
+    <!--       <i class="fa fa-tag text-info"></i>&nbsp;{{task.type}} -->
+    <!--     </li> -->
+    <!--     <li> -->
+    <!--       <i class="fa fa-tag text-info"></i>&nbsp;{{task.difficulty}} -->
+          
+    <!--     </li> -->
+    <!--   </ul> -->
+    <!-- </div> -->
+    <!-- <div data-toggle="modal" data-target="#undoTask" ng-if="task.priority == '紧急'" ng-click="taskDetail(task.id)" class="task-list task-danger" ng-repeat="task in task_undo"> -->
+    <!--   <div class="task-name">{{task.name}}</div> -->
+    <!--   <ul class="task-sign"> -->
+    <!--     <li> -->
+    <!--       <i class="fa fa-tag text-info"></i>&nbsp;{{task.type}} -->
+    <!--     </li> -->
+    <!--     <li> -->
+    <!--       <i class="fa fa-tag text-info"></i>&nbsp;{{task.difficulty}} -->
+          
+    <!--     </li> -->
+    <!--   </ul> -->
+    <!-- </div> -->
+  <!-- Modal -->
+    <form name="form" role="form" class="form-validation">
+      <div class="modal fade" id="undoTask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">{{taskDetail.name}}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="task-detail-handler-set">
+                <div class="task-detail-handler on-flex">
+                  <h6 class="task-info-title">预计用时</h6>
+                  <div class="task-info-content"><i class="ti ti-timer text-info"></i>&nbsp;{{taskDetail.etimated_time}}</div>
+                </div>
+                <div class="task-detail-handler on-flex">
+                  <h6 class="task-info-title">权重</h6>
+                  <div class="task-info-content"><i class="fa fa-pie-chart text-success"></i>&nbsp;{{taskDetail.weight}}</div>
+                </div>
+                <div class="task-detail-handler on-flex">
+                  <h6 class="task-info-title">优先级</h6>
+                  <div class="task-info-content"><i ng-if="taskDetail.priority == '普通'" class="fa fa-circle-o text-default"></i><i ng-if="taskDetail.priority ==  '较急'" class="fa fa-circle-o text-warning"></i><i ng-if="taskDetail.priority ==  '紧急'" class="fa fa-circle-o text-danger"></i>&nbsp;{{taskDetail.priority}}</div>
+                </div>
+                <div class="task-detail-handler on-flex">
+                  <h6 class="task-info-title">类型</h6>
+                  <div class="task-info-content"><i class="glyphicon  glyphicon-th-large text-primary"></i>&nbsp;{{taskDetail.type}}</div>
+                </div>
+                <div class="task-detail-handler on-flex">
+                  <h6 class="task-info-title">难度</h6>
+                  <div class="task-info-content"><i class="ti ti-target text-dark"></i>&nbsp;{{taskDetail.difficulty}}</div>
+                </div>
+              </div>
+              <div class="task-desc">
+                <div class="task-desc-title">任务描述:</div>
+                <div class="task-desc-content">
+                {{taskDetail.desc}}
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="submit" class="btn btn-primary" ng-click="receiveTask(taskDetail.id)">领取</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="add-task">
+      <button class="text-info btn-add" data-toggle="modal" data-target="#addTask"><i class="fa fa-plus btn-rounded text-info btn-add-icon"></i>添加任务</button>
+      <!-- Modal -->
+      <form name="form" role="form" class="form-validation">
+        <div class="modal fade" id="addTask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加任务</h4>
+              </div>
+              <div class="modal-body">
+                <div class="panel-body" style="text-align:left">    
+                  <div class="form-group">
+                    <label>任务名</label>
+                    <input type="text" class="form-control" ng-model="task.task_name"  required >
+                  </div>
+                    <div class="form-group">
+                      <label>任务权重</label>
+                      <input type="text" class="form-control" ng-model="task.task_weight"  required  placeholder="0.3">
+                    </div>
+                    <div class="form-group">
+                      <label>任务估时</label>
+                      <input type="text" class="form-control" ng-model="task.etimated_time"  required  placeholder="">
+                    </div>
+                    <div class="form-group">
+                      <label>任务描述</label>
+                      <textarea class="form-control" rows="5" ng-model="task.task_desc" placeholder="任务描述"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>任务优先级</label>
+                      <select class="form-control" ng-model="task.task_priority" required>
+                        <option value="普通">普通</option>
+                        <option value="较急">较急</option>
+                        <option value="紧急">紧急</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>任务难度</label>
+                      <select class="form-control" ng-model="task.task_difficulty" required>
+                        <option value="难度较易">难度较易</option>
+                        <option value="难度适中">难度适中</option>
+                        <option value="难度较难">难度较难</option>
+                        <option value="难度很难">难度很难</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>任务类型</label>
+                      <select class="form-control" ng-model="task.task_type" required>
+                        <option value="后台开发">后台开发</option>
+                        <option value="前端开发">前端开发</option>
+                        <option value="全栈开发">全栈开发</option>
+                      </select>
+                    </div>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" ng-click="addTask()">添加</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="kanban">
+    <div class="kanban-header">
+      进行中
+    </div>
+    <div data-toggle="modal" data-target="#doingTask" ng-click="taskDetail(task.id)" ng-if="task.priority == '普通'" class="task-list task-default" ng-repeat="task in task_doing">
+      <div class="task-name">{{task.name}}</div>
+      <div class="task-detail">
+        <div class="task-executor"><i class="fa fa-user text-danger"></i>&nbsp;{{task.executor}}</div>
+        <div class="task-time"><i class="ti ti-timer text-success"></i>&nbsp;{{task.hours}}小时</div>
+      </div>
+      <ul class="task-sign">
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.type}}
+        </li>
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.difficulty}}
+          
+        </li>
+      </ul>
+    </div>
+    <div data-toggle="modal" data-target="#doingTask" ng-click="taskDetail(task.id)" ng-if="task.priority == '较急'" class="task-list task-warning" ng-repeat="task in task_doing">
+      <div class="task-name">{{task.name}}</div>
+      <div class="task-detail">
+        <div class="task-executor"><i class="fa fa-user text-danger"></i>&nbsp;{{task.executor}}</div>
+        <div class="task-time"><i class="ti ti-timer text-success"></i>&nbsp;{{task.hours}}小时</div>
+      </div>
+      <ul class="task-sign">
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.type}}
+        </li>
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.difficulty}}
+          
+        </li>
+      </ul>
+    </div>
+    <div data-toggle="modal" data-target="#doingTask" ng-click="taskDetail(task.id)" ng-if="task.priority == '紧急'" class="task-list task-danger" ng-repeat="task in task_doing">
+      <div class="task-name">{{task.name}}</div>
+      <div class="task-detail">
+        <div class="task-executor"><i class="fa fa-user text-danger"></i>&nbsp;{{task.executor}}</div>
+        <div class="task-time"><i class="ti ti-timer text-success"></i>&nbsp;{{task.hours}}小时</div>
+      </div>
+      <ul class="task-sign">
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.type}}
+        </li>
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.difficulty}}
+          
+        </li>
+      </ul>
+    </div>
+  <!-- Modal -->
+    <form name="form" role="form" class="form-validation">
+      <div class="modal fade" id="doingTask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">{{taskDetail.name}}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="task-detail-handler-set" style="margin-bottom:10px;">
+                <div class="task-detail-handler on-flex-doing">
+                  <h6 class="task-info-title">执行者</h6>
+                  <div class="task-info-content"><i class="fa fa-user text-danger"></i>&nbsp;{{taskDetail.executor}}</div>
+                </div>
+                <div class="task-detail-handler on-flex-doing">
+                  <h6 class="task-info-title">已用时</h6>
+                  <div class="task-info-content"><i class="ti ti-timer text-info"></i>&nbsp;{{taskDetail.hours}}</div>
+                </div>
+
+              </div>
+              <div class="task-detail-handler-set">
+                <div class="task-detail-handler on-flex">
+                  <h6 class="task-info-title">预计用时</h6>
+                  <div class="task-info-content"><i class="ti ti-timer text-info"></i>&nbsp;{{taskDetail.etimated_time}}</div>
+                </div>
+                <div class="task-detail-handler on-flex">
+                  <h6 class="task-info-title">权重</h6>
+                  <div class="task-info-content"><i class="fa fa-pie-chart text-success"></i>&nbsp;{{taskDetail.weight}}</div>
+                </div>
+                <div class="task-detail-handler on-flex">
+                  <h6 class="task-info-title">优先级</h6>
+                  <div class="task-info-content"><i ng-if="taskDetail.priority == '普通'" class="fa fa-circle-o text-default"></i><i ng-if="taskDetail.priority ==  '较急'" class="fa fa-circle-o text-warning"></i><i ng-if="taskDetail.priority ==  '紧急'" class="fa fa-circle-o text-danger"></i>&nbsp;{{taskDetail.priority}}</div>
+                </div>
+                <div class="task-detail-handler on-flex">
+                  <h6 class="task-info-title">类型</h6>
+                  <div class="task-info-content"><i class="glyphicon  glyphicon-th-large text-primary"></i>&nbsp;{{taskDetail.type}}</div>
+                </div>
+                <div class="task-detail-handler on-flex">
+                  <h6 class="task-info-title">难度</h6>
+                  <div class="task-info-content"><i class="ti ti-target text-dark"></i>&nbsp;{{taskDetail.difficulty}}</div>
+                </div>
+              </div>
+              <div class="task-desc">
+                <div class="task-desc-title">任务描述:</div>
+                <div class="task-desc-content">
+                {{taskDetail.desc}}
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="submit" class="btn btn-primary" ng-click="completeTask(taskDetail.id)">完成</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="kanban">
+    <div class="kanban-header">
+      已完成
+    </div>
+    <div data-toggle="modal" data-target="#doneTask" ng-if="task.priority == '普通'" class="task-list task-default" ng-click="taskDetail(task.id)" ng-repeat="task in task_done">
+      <div class="task-name">{{task.name}}</div>
+      <div class="task-detail">
+        <div class="task-executor"><i class="fa fa-user text-danger"></i>&nbsp;{{task.executor}}</div>
+        <div class="task-time"><i class="ti ti-timer text-success"></i>&nbsp;{{task.hours}}小时</div>
+      </div>
+      <ul class="task-sign">
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.type}}
+        </li>
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.difficulty}}
+          
+        </li>
+      </ul>
+    </div>
+    <div data-toggle="modal" data-target="#doneTask" ng-click="taskDetail(task.id)" ng-if="task.priority == '较急'" class="task-list task-warning" ng-repeat="task in task_done">
+      <div class="task-name">{{task.name}}</div>
+      <div class="task-detail">
+        <div class="task-executor"><i class="fa fa-user text-danger"></i>&nbsp;{{task.executor}}</div>
+        <div class="task-time"><i class="ti ti-timer text-success"></i>&nbsp;{{task.hours}}小时</div>
+      </div>
+      <ul class="task-sign">
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.type}}
+        </li>
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.difficulty}}
+
+        </li>
+      </ul>
+    </div>
+    <div data-toggle="modal" data-target="#doneTask" ng-if="task.priority == '紧急'" class="task-list task-danger" ng-click="taskDetail(task.id)" ng-repeat="task in task_done">
+      <div class="task-name">{{task.name}}</div>
+      <div class="task-detail">
+        <div class="task-executor"><i class="fa fa-user text-danger"></i>&nbsp;{{task.executor}}</div>
+        <div class="task-time"><i class="ti ti-timer text-success"></i>&nbsp;{{task.hours}}小时</div>
+      </div>
+      <ul class="task-sign">
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.type}}
+        </li>
+        <li>
+          <i class="fa fa-tag text-info"></i>&nbsp;{{task.difficulty}}
+
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Modal -->
+  <form name="form" role="form" class="form-validation">
+    <div class="modal fade" id="doneTask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">{{taskDetail.name}}</h4>
+          </div>
+          <div class="modal-body">
+            <div class="task-detail-handler-set" style="margin-bottom:10px;">
+              <div class="task-detail-handler on-flex-doing">
+                <h6 class="task-info-title">执行者</h6>
+                <div class="task-info-content"><i class="fa fa-user text-danger"></i>&nbsp;{{taskDetail.executor}}</div>
+              </div>
+              <div class="task-detail-handler on-flex-doing">
+                <h6 class="task-info-title">已用时</h6>
+                <div class="task-info-content"><i class="ti ti-timer text-info"></i>&nbsp;{{taskDetail.hours}}</div>
+              </div>
+
+            </div>
+            <div class="task-detail-handler-set">
+              <div class="task-detail-handler on-flex">
+                <h6 class="task-info-title">预计用时</h6>
+                <div class="task-info-content"><i class="ti ti-timer text-info"></i>&nbsp;{{taskDetail.etimated_time}}</div>
+              </div>
+              <div class="task-detail-handler on-flex">
+                <h6 class="task-info-title">权重</h6>
+                <div class="task-info-content"><i class="fa fa-pie-chart text-success"></i>&nbsp;{{taskDetail.weight}}</div>
+              </div>
+              <div class="task-detail-handler on-flex">
+                <h6 class="task-info-title">优先级</h6>
+                <div class="task-info-content"><i ng-if="taskDetail.priority == '普通'" class="fa fa-circle-o text-default"></i><i ng-if="taskDetail.priority ==  '较急'" class="fa fa-circle-o text-warning"></i><i ng-if="taskDetail.priority ==  '紧急'" class="fa fa-circle-o text-danger"></i>&nbsp;{{taskDetail.priority}}</div>
+              </div>
+              <div class="task-detail-handler on-flex">
+                <h6 class="task-info-title">类型</h6>
+                <div class="task-info-content"><i class="glyphicon  glyphicon-th-large text-primary"></i>&nbsp;{{taskDetail.type}}</div>
+              </div>
+              <div class="task-detail-handler on-flex">
+                <h6 class="task-info-title">难度</h6>
+                <div class="task-info-content"><i class="ti ti-target text-dark"></i>&nbsp;{{taskDetail.difficulty}}</div>
+              </div>
+            </div>
+            <div class="task-desc">
+              <div class="task-desc-title">任务描述:</div>
+              <div class="task-desc-content">
+                {{taskDetail.desc}}
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

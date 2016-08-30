@@ -1,0 +1,6 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">
+    {{departmentInfo.name}}
+    <span class="badge bg-info">8人</span>
+  </h3>
+</div>

@@ -1,0 +1,86 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">项目审核</h3>
+</div>
+<ul class="nav nav-lg nav-tabs" ui-nav style="margin-top:10px;">
+  <li ng-if="kind == 0" class="active">
+    <a href="#/ui/project/project_audit/0">未审核</a>
+  </li>
+  <li ng-if="kind != 0" class="">
+    <a href="#/ui/project/project_audit/0">未审核</a>
+  </li>
+  <li ng-if="kind == 1" class="active">
+    <a href="#/ui/project/project_audit/1">未分配</a>
+  </li>
+  <li ng-if="kind != 1" class="">
+    <a href="#/ui/project/project_audit/1">未分配</a>
+  </li>
+  <li ng-if="kind == 2" class="active">
+    <a href="#/ui/project/project_audit/2">已分配</a>
+  </li>
+  <li ng-if="kind != 2" class="">
+    <a href="#/ui/project/project_audit/2">已分配</a>
+  </li>
+  <li ng-if="kind == -1" class="active">
+    <a href="#/ui/project/project_audit/-1">未通过</a>
+  </li>
+  <li ng-if="kind != -1" class="">
+    <a href="#/ui/project/project_audit/-1">未通过</a>
+  </li>
+</ul>
+<div class="p b-a no-b-t bg-white m-b">
+  <table  class="table  table-striped">
+    <thead>
+      <tr>
+        <th>项目名</th>
+        <th>项目类型</th>
+        <th>项目等级</th>
+        <th>申请人</th>
+        <th ng-if="userPermission.permission.all == true || userPermission.permission.audit_project == true">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in projects" st-select-row="row">
+        <td>{{row.name}}</td>
+        <td>{{row.type}}</td>
+        <td>{{row.range}}</td>
+        <td>{{row.applicanter}}</td>
+        <td ng-if="userPermission.permission.all == true || userPermission.permission.audit_project == true">
+           <button ng-if="kind == 0" class="btn btn-rounded btn-stroke btn-info" ng-click="audit(row.id, 1)">通过</button>
+           <button ng-if="kind == 1" class="btn btn-rounded btn-stroke btn-info" data-toggle="modal" data-target="#distribute">分配</button>
+
+           <button class="btn btn-rounded btn-stroke btn-warning" ng-click="audit(row.id, -1)">撤回</button>
+           <!-- Modal -->
+           <form name="form" role="form" class="form-validation">
+             <div class="modal fade" id="distribute" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+               <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <h4 class="modal-title" id="myModalLabel">项目分配</h4>
+                   </div>
+                   <div class="modal-body">
+                     <div class="panel-body" style="text-align:left">    
+                       <div class="form-group">
+                         <label>项目经理</label>
+                         <input type="text" class="form-control" ng-change="getProjectModel(project)" ng-model="project.project_manager" placeholder="请填写邮箱" required >
+                       </div>
+                         <div class="form-group">
+                           <label>产品经理</label>
+                           <input type="text" class="form-control" ng-change="getProjectModel(project)" ng-model="project.product_manager" placeholder="请填写邮箱" required >
+                         </div>
+                     </div>
+
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                     <button type="submit" class="btn btn-primary" ng-click="distribute(row.id)">分配</button>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

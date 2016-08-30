@@ -1,0 +1,55 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">项目审核</h3>
+</div>
+<ul class="nav nav-lg nav-tabs" ui-nav style="margin-top:10px;">
+  <li ng-if="kind == 0" class="active">
+    <a href="#/ui/project/project_audit/0">未审核</a>
+  </li>
+  <li ng-if="kind != 0" class="">
+    <a href="#/ui/project/project_audit/0">未审核</a>
+  </li>
+  <li ng-if="kind == 1" class="active">
+    <a href="#/ui/project/project_audit/1">未分配</a>
+  </li>
+  <li ng-if="kind != 1" class="">
+    <a href="#/ui/project/project_audit/1">未分配</a>
+  </li>
+  <li ng-if="kind == 2" class="active">
+    <a href="#/ui/project/project_audit/2">已分配</a>
+  </li>
+  <li ng-if="kind != 2" class="">
+    <a href="#/ui/project/project_audit/2">已分配</a>
+  </li>
+  <li ng-if="kind == 3" class="active">
+    <a href="#/ui/project/project_audit/3">未通过</a>
+  </li>
+  <li ng-if="kind != 3" class="">
+    <a href="#/ui/project/project_audit/3">未通过</a>
+  </li>
+</ul>
+<div class="p b-a no-b-t bg-white m-b">
+  <table  class="table  table-striped">
+    <thead>
+      <tr>
+        <th>项目名</th>
+        <th>项目类型</th>
+        <th>项目等级</th>
+        <th>申请人</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in projects" st-select-row="row">
+        <td>{{row.name}}</td>
+        <td>{{row.type}}</td>
+        <td>{{row.range}}</td>
+        <td>{{row.applicanter}}</td>
+        <td>
+           <button ng-if="kind == 0" class="btn btn-rounded btn-stroke btn-info" ng-click="agree(row.id)">通过</button>
+           <button ng-if="kind == 1" class="btn btn-rounded btn-stroke btn-info" ng-click="agree(row.id)">分配</button>
+           <button class="btn btn-rounded btn-stroke btn-warning">撤回</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

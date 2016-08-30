@@ -1,0 +1,50 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">
+    {{departmentInfo.name}}
+    <span class="badge bg-info">8人</span>
+  </h3>
+</div>
+<button class="btn btn-addon btn-primary"><i class="fa fa-plus"></i>新增成员</button>
+<div class="panel panel-default">
+  <div class="panel-heading">成员列表</div>
+  <table st-table="rowCollectionPage" class="table table-striped">
+    <thead>
+      <tr>
+        <th st-sort="lastName">姓名</th>
+        <th st-sort="birthDate">邮箱</th>
+        <th st-sort="balance">电话</th>
+        <th>角色</th>
+      </tr>
+      <tr>
+        <th>
+          <input st-search="'firstName'" placeholder="查询姓名" class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search placeholder="查询邮箱" class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search placeholder="查询电话" class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search placeholder="查询角色" class="input-sm form-control" type="search"/>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in rowCollectionPage">
+                  <td>{{row.firstName | uppercase}}</td>
+                  <td>{{row.lastName}}</td>
+                  <td>{{row.birthDate | date}}</td>
+                  <td>{{row.balance | currency}}</td>
+                  <td><a ng-href="mailto:{{row.email}}">email</a></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5" class="text-center">
+          <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7" class="no-margin"></div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

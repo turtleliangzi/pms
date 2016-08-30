@@ -1,0 +1,112 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">用户组管理</h3>
+</div>
+<button class="btn btn-addon btn-primary" style="margin:20px;20px;" data-toggle="modal" data-target="#add"><i class="fa fa-plus"></i>新增用户组</button>
+<!-- Modal -->
+<form name="form" role="form" class="form-validation">
+  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">新增用户组</h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel-body" style="text-align:left">    
+            <div class="form-group">
+              <label>组名</label>
+              <input type="text" class="form-control"  ng-model="group.group_name"  required placeholder="填写用户组名">
+            </div>
+            <div class="form-group">
+              <label>权限</label>
+              <div>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="all" ng-change="changePermission(all, 'all')">
+                  <i></i>
+                  所有权限
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="add_department"  ng-change="changePermission(add_department, 'add_department')">
+                  <i></i>
+                  新增部门
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="add_project" ng-change="changePermission(add_project, 'add_project')">
+                  <i></i>
+                  新增项目
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox"  ng-model="audit_project" ng-change="changePermission(audit_project, 'audit_project')">
+                  <i></i>
+                  审核项目
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="add_group" ng-change="changePermission(add_group, 'add_group')">
+                  <i></i>
+                  新增用户组
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="assign_permission"  ng-change="changePermission(assign_permission, 'assign_permission')">
+                  <i></i>
+                  分配权限
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="check_contacts"  ng-change="changePermission(check_contacts, 'check_contacts')">
+                  <i></i>
+                  查看那成员通讯录
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="check_all_departments"  ng-change="changePermission(check_all_departments, 'check_all_departments')">
+                  <i></i>
+                  查看所有部门
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="add_demand"  ng-change="changePermission(add_demand, 'add_demand')">
+                  <i></i>
+                  新增需求
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="check_all_projects"  ng-change="changePermission(check_all_projects, 'check_all_projects')">
+                  <i></i>
+                  查看所有项目
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="edit_group"  ng-change="changePermission(edit_group, 'edit_group')">
+                  <i></i>
+                  编辑用户组
+                </label>
+                <label class="ui-checks checkbox-inline">
+                  <input type="checkbox" ng-model="delete_group"  ng-change="changePermission(delete_group, 'delete_group')">
+                  <i></i>
+                  删除用户组
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="submit" class="btn btn-primary" ng-click="addGroup()">新增</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="panel panel-default">
+  <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>用户组名</th>
+        <th>权限</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="group in groups">
+        <td>{{group.name}}</td>
+        <td><span ng-if="group.permission.all == true">所有权限&nbsp;&nbsp;</span><span ng-if="group.permission.add_department == true">添加部门&nbsp;&nbsp;</span><span ng-if="group.permission.add_project == true">添加项目&nbsp;&nbsp;</span><span ng-if="group.permission.audit_project == true">审核项目&nbsp;&nbsp;</span><span ng-if="group.permission.add_group == true">添加用户组&nbsp;&nbsp;</span><span ng-if="group.permission.assign_permission == true">分配权限&nbsp;&nbsp;</span><span ng-if="group.permission.check_contacts == true">查看公司成员通讯录&nbsp;&nbsp;</span><span ng-if="group.permission.check_all_departments == true">查看所有部门&nbsp;&nbsp;</span><span ng-if="group.permission.add_demand == true">添加需求&nbsp;&nbsp;</span></span><span ng-if="group.permission.check_all_projects == true">查看所有项目&nbsp;&nbsp;</span><span ng-if="group.permission.edit_group == true">编辑用户组&nbsp;&nbsp;</span><span ng-if="group.permission.delete_group == true">删除用户组</td>
+        <td>编辑</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

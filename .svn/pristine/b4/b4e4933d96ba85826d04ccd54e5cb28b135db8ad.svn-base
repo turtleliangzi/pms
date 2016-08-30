@@ -1,0 +1,36 @@
+"use.strict";
+
+/*
+ * Auth Service
+ * @signIn function
+ * @signUp function
+ */
+
+
+app.factory("Auth", function (Restangular, $location) {
+    return {
+        signIn: function ($scope, user) {
+            var auth = Restangular.all('auth/login');
+            auth.post(user).then(function(response) {
+                alert(response);
+                if (response.token !== undefined) {
+                    window.localStorage.setItem("token", response.token);
+                    $location.path('/');
+                } else {
+                    alert("error");
+                }
+            })
+        },
+        signUp: function ($scope, user) {
+            var auth = Restangular.all('auth/register');
+            auth.post(user).then(function (response) {
+                if (response.token !== undefined) {
+                    window.localStorage.setItem('token', response.token);
+                    $location.path('/');
+                } else {
+                    alert("error");
+                }
+            })
+        }
+    }
+});

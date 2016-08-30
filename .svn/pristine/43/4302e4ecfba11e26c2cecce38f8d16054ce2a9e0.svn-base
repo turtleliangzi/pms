@@ -1,0 +1,31 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{project.name}}-文件
+    <span ng-if="project.approve_status == 3" class="label bg-success pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-success pull-in"></b>进行中</span>
+    <span ng-if="project.approve_status == 2" class="label bg-warning pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-warning pull-in"></b>待排期</span>
+    <span ng-if="project.approve_status == 4" class="label bg-info pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-info pull-in"></b>上线中</span>
+    <span ng-if="project.approve_status == 5" class="label bg-danger pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-danger pull-in"></b>已结项</span>
+    <button ng-if="project.approve_status == 2" class="btn btn-rounded btn-stroke btn-success" ng-click="dealProject(project.id)">开始</button>
+    <button ng-if="project.approve_status == 3" class="btn btn-rounded btn-stroke btn-success" ng-click="dealProject(project.id)">申请上线</button>
+    <button ng-if="project.approve_status == 4" class="btn btn-rounded btn-stroke btn-warning" ng-click="dealProject(project.id)">结项</button>
+  </h3>
+</div>
+<div style="padding:10px">
+  <div class="project-nav">
+    <ul class="nav-list" >
+      <li class="">
+        <a ui-sref="ui.project.project_kanban({project_id:project.id})">任务</a>
+      </li>
+      <li class="nav-active">
+        <a ui-sref="ui.project.project_file({project_id:project.id})">文件</a>
+      </li>
+    </ul>
+  </div>
+  <div class="project-file">
+    <div class="file-header">
+      <h3>文件库</h3>
+      <div class="btn-group">
+        创建文件夹
+      </div>
+    </div>
+  </div>
+</div>

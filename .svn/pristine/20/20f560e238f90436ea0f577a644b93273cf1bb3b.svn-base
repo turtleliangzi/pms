@@ -1,0 +1,17 @@
+<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header" >
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h4 class="aside-title" >项目成员</h4>
+      </div>
+      <div class="aside-body">
+        <button class="btn btn-addon btn-success"><i class="fa fa-plus"></i>新增成员</button>
+      </div>
+      <div class="aside-footer">
+        <button type="button" class="btn btn-default" ng-click="$hide()">关闭</button>
+        <button type="button" class="btn btn-primary" ng-click="$hide()"  data-toggle="modal" data-target="#addMember">新增</button>
+      </div>
+    </div>
+  </div>
+</div>

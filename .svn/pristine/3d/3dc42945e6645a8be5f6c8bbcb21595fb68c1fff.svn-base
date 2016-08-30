@@ -1,0 +1,10 @@
+.department {
+    height:100px;
+    width:100px;
+    text-align:center;
+    border-radius:100px;
+    line-height:100px;
+    color:#fff;
+    font-weight:bold;
+    display:inline-block;
+}

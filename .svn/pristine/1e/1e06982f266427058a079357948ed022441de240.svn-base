@@ -1,0 +1,65 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{project.name}}-文件
+    <span ng-if="project.approve_status == 3" class="label bg-success pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-success pull-in"></b>进行中</span>
+    <span ng-if="project.approve_status == 2" class="label bg-warning pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-warning pull-in"></b>待排期</span>
+    <span ng-if="project.approve_status == 4" class="label bg-info pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-info pull-in"></b>上线中</span>
+    <span ng-if="project.approve_status == 5" class="label bg-danger pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-danger pull-in"></b>已结项</span>
+    <button ng-if="project.approve_status == 2" class="btn btn-rounded btn-stroke btn-success" ng-click="dealProject(project.id)">开始</button>
+    <button ng-if="project.approve_status == 3" class="btn btn-rounded btn-stroke btn-success" ng-click="dealProject(project.id)">申请上线</button>
+    <button ng-if="project.approve_status == 4" class="btn btn-rounded btn-stroke btn-warning" ng-click="dealProject(project.id)">结项</button>
+  </h3>
+</div>
+<div class="project-nav">
+  <ul class="nav-list" >
+    <li class="">
+      <a ui-sref="ui.project.project_kanban({project_id:project.id})">任务</a>
+    </li>
+    <li class="nav-active">
+      <a ui-sref="ui.project.project_file({project_id:project.id})">文件</a>
+    </li>
+  </ul>
+</div>
+<div style="padding:10px;width:100%">
+  <div class="project-file">
+    <div class="file-header">
+      <h4>文件库</h4>
+      <div class="btn-group">
+        <button class="text-info btn-info" data-toggle="modal" data-target="#addFolder"><i class="fa fa-plus btn-rounded text-info btn-add-icon"></i>创建文件夹</button>
+        <button class="text-info btn-info" data-toggle="modal" data-target="#addFolder"><i class="fa fa-plus btn-rounded text-info btn-add-icon"></i>创建文件夹</button>
+      </div>
+    </div>
+    <div class="file-body">
+      <table st-table="rowCollectionPip"  st-pipe="callServer" class="table table-striped">
+        <thead>
+          <tr>
+            <th>名称</th>
+            <th>大小</th>
+            <th>创建者</th>
+            <th>更新时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><i class="fa fa-folder text-xl" style="color:#4bb622"></i>&nbsp;&nbsp;图片</td>
+            <td>-</td>
+            <td>廖亮</td>
+            <td>2015-12-02</td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-folder text-xl" style="color:#4bb622"></i>&nbsp;&nbsp;图片</td>
+            <td>-</td>
+            <td>廖亮</td>
+            <td>2015-12-02</td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-folder text-xl" style="color:#4bb622"></i>&nbsp;&nbsp;图片</td>
+            <td>-</td>
+            <td>廖亮</td>
+            <td>2015-12-02</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

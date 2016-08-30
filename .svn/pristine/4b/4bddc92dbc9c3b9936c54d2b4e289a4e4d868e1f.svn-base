@@ -1,0 +1,29 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">
+    {{departmentInfo.name}}
+    <span class="badge bg-info">8人</span>
+  </h3>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Client side Pagination</div>
+  <div class="panel-body">
+    <form>
+    </form>
+  </div>
+  <table st-table="rowCollectionPage" class="table table-striped">
+    <thead>
+      <tr>
+        <th st-sort="firstName">first name</th>
+        <th st-sort="lastName">last name</th>
+        <th st-sort="birthDate">birth date</th>
+        <th st-sort="balance">balance</th>
+        <th>email</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

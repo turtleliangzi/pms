@@ -1,0 +1,92 @@
+"use.strict";
+
+/*
+ * Company Service
+ */
+
+
+app.factory("Company", function (Restangular, $location, $alert, alertMsg) {
+    return {
+        info: function ($scope, company_code) {
+            Restangular.one('company/info/', company_code).get().then(function(response) {
+                if (response.status !== undefined ) {
+                    if (response.status === 400 || response.status === 401) {
+                        $location.path('/signin');
+                    } else {
+                        $alert({
+                            title: 'Error:',
+                            content: response.error,
+                            placement: 'top-right',
+                            type: 'danger',
+                            show: true,
+                            duration: 3,
+                            animation: "am-fade-and-slide-top",
+                        })
+                    }
+                } else if(response.data !== undefined) {
+                    $scope.company = response.data;
+                }
+            })
+        },
+        add: function ($scope, newCompany) {
+            var company = Restangular.all('company/add');
+            company.post(newCompany).then(function (response) {
+                if (response.error !== undefined) {
+                    if (response.status === 400 || response.status === 401) {
+                        $location.path("/signin");
+                    } else {
+                        $alert({
+                            title: 'Error:',
+                            content: response.error,
+                            placement: 'top-right',
+                            type: 'danger',
+                            show: true,
+                            duration: 3,
+                            animation: 'am-fade-and-slide-top',
+                        })
+
+                    }
+                } else if (response.status === 200){
+                    alert(response.success);
+                    $location.path('/#/');
+                }
+            })
+        },
+        join: function ($scope, oldCompany) {
+            var company = Restangular.all('company/join');
+            company.post(oldCompany).then(function (response) {
+                alertMsg.alert(response, '/');
+            })
+        }
+    }
+});
+
+
+app.factory("alertMsg", function ($alert, $location) {
+    return {
+        alert: function (response, href) {
+            if (response.error !== undefined) {
+                if (response.status === 400 || response.status === 401) {
+                    $location.path("/signin");
+                } else {
+                    $alert({
+                        title: 'Error:',
+                        content: response.error,
+                        placement: 'top-right',
+                        type: 'danger',
+                        show: true,
+                        duration: 3,
+                        animation: 'am-fade-and-slide-top',
+                    })
+
+                }
+            } else if (response.status === 200 || response.data !== undefined){
+                alert(response.success);
+                $location.path(href);
+            }
+
+        }
+    }
+
+
+});

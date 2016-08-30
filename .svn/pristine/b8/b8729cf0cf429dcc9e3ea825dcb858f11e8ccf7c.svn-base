@@ -1,0 +1,11 @@
+'use strict';
+
+/**
+ * Controller of the company
+ */
+
+app.controller('CompanyCtrl', function($scope, $stateParams, Company) {
+    alert($scope.name);
+
+});
+

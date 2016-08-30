@@ -1,0 +1,10 @@
+'use strict';
+
+/**
+ * Controller of the permission
+ */
+
+app.controller('PermissionAssignCtrl', function($scope, $stateParams, Permission) {
+
+});
+

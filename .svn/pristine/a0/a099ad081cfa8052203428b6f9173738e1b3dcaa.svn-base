@@ -1,0 +1,288 @@
+'use strict';
+
+/**
+ * Controller of the project
+ */
+
+app.controller('MyProjectCtrl', function($scope, $stateParams, Project) {
+    $scope.project = $stateParams.project;
+
+    $scope.bgs = Array('success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary');
+
+    Project.myProject($scope);
+
+    $scope.addProject = function () {
+        if ($scope.project === undefined) {
+            return;
+        } else {
+            if ($scope.project.project_name === undefined) {
+                return;
+            }
+            if ($scope.project.project_type === undefined) {
+                return;
+            }
+            if ($scope.project.project_range === undefined) {
+                return;
+            }
+            if ($scope.project.project_desc === undefined) {
+                return;
+            }
+            if ($scope.project.etimated_time === undefined) {
+                return;
+            }
+        }
+        Project.addProject($scope, $scope.project);
+    }
+
+});
+
+app.controller('ProjectAuditCtrl', function ($scope, $stateParams, Project) {
+    $scope.kind = $stateParams.kind;
+    if ($scope.kind === undefined || $scope.kind === '') {
+        $scope.kind = 0;
+    }
+    Project.getKindProject($scope, $scope.kind);
+
+    $scope.audit = function(project_id, status) {
+        var params = {
+            'project_id': project_id ,
+            'status': status,
+        };
+        Project.audit($scope, params, $scope.kind);
+    }
+
+    $scope.getProjectModel = function (project) {
+        $scope.project = project;
+    }
+    
+    $scope.distribute = function(project_id) {
+        if ($scope.project === undefined) {
+            return;
+        } else {
+            if ($scope.project.project_manager === undefined) {
+                return;
+            }
+            if ($scope.project.product_manager === undefined) {
+                return;
+            }
+        }
+        $scope.project.project_id = project_id;
+        Project.distribute($scope, $scope.project);
+
+    }
+
+});
+
+app.controller('ProjectKanbanCtrl', function ($scope, $stateParams, Project, alertMsg, Restangular) {
+    $scope.project_id = $stateParams.project_id;
+
+    // 获取所有阶段目标
+    Restangular.one('project/get/goal/all', $scope.project_id).get().then(function (response) {
+        var bool = alertMsg.alert(response, '');
+        if (bool) {
+            $scope.goals = response.data;
+            $scope.selectedGoal = $scope.goals[0]['id'];
+            Project.getUndoTask($scope, $scope.project_id, $scope.selectedGoal, 0);
+            Project.getDoingTask($scope, $scope.project_id, $scope.selectedGoal, 1);
+            Project.getDoneTask($scope, $scope.project_id, $scope.selectedGoal, 2);
+            Project.getOneGoal($scope, $scope.project_id, $scope.selectedGoal);
+        }
+    })
+
+    $scope.changeGoal = function (changeGoal) {
+        $scope.selectedGoal = changeGoal;
+        Project.getUndoTask($scope, $scope.project_id, changeGoal, 0);
+        Project.getDoingTask($scope, $scope.project_id, changeGoal, 1);
+        Project.getDoneTask($scope, $scope.project_id, changeGoal, 2);
+            Project.getOneGoal($scope, $scope.project_id, changeGoal);
+    }
+
+    $scope.goal = $stateParams.goal;
+    $scope.addGoal = function (project_id) {
+        if ($scope.goal === undefined) {
+            return;
+        } else {
+            if ($scope.goal.goal_name === undefined) {
+                return;
+            }
+            if ($scope.goal.goal_weight === undefined) {
+                return;
+            }
+            if ($scope.goal.start_time === undefined) {
+                return;
+            }
+            if ($scope.goal.etimated_end_time === undefined) {
+                return;
+            }
+            if ($scope.goal.goal_order === undefined) {
+                return;
+            }
+        }
+        $scope.goal.project_id = project_id;
+        Project.addGoal($scope, $scope.goal);
+    }
+
+    Project.getOne($scope, $scope.project_id);
+
+    $scope.member = $stateParams.member;
+    $scope.addMember = function (project_id) {
+        if ($scope.member === undefined) {
+            return;
+        } else {
+            if ($scope.member.email === undefined) {
+                return;
+            }
+            if ($scope.member.project_role === undefined) {
+                return;
+            }
+        }
+        $scope.member.project_id = project_id;
+        Project.addMember($scope, $scope.member);
+    } 
+
+    Project.getMember($scope, $scope.project_id);
+
+    $scope.task = $stateParams.task;
+    $scope.addTask = function () {
+        if ($scope.task === undefined) {
+            return;
+        } else {
+            if ($scope.task.task_name === undefined) {
+                return;
+            }
+            if ($scope.task.task_weight === undefined) {
+                return;
+            }
+            if ($scope.task.etimated_time === undefined) {
+                return;
+            }
+            if ($scope.task.task_priority === undefined) {
+                return;
+            }
+            if ($scope.task.task_difficulty === undefined) {
+                return;
+            }
+            if ($scope.task.task_type === undefined) {
+                return;
+            }
+        }
+        $scope.task.goal = $scope.selectedGoal;
+        Project.addTask($scope, $scope.task, $scope.project_id);
+    }
+
+    $scope.taskDetail2 = function (task_id) {
+        Project.getTaskOne($scope, $scope.selectedGoal,  task_id);
+    }
+
+    $scope.receiveTask = function (task_id, goal_status) {
+        if (goal_status == 0) {
+            alert("该阶段目标还未开始");
+        } else {
+            Project.receiveTask($scope, $scope.selectedGoal, task_id, $scope.project_id);
+        }
+    }
+
+    $scope.completeTask = function (task_id) {
+        Project.completeTask($scope, $scope.selectedGoal, task_id, $scope.project_id);
+    }
+    $scope.checkStatus = function (approve_status) {
+        if (approve_status == 2) {
+            alert("请先开始项目");
+        }
+    }
+
+    $scope.dealProject = function (project_id) {
+        Project.dealProject($scope, project_id);
+    }
+    $scope.dealGoal = function (project_id, goal_id) {
+        Project.dealGoal($scope, project_id, goal_id);
+    }
+
+});
+app.controller('ProjectScheduleCtrl', function ($scope, $stateParams, Project, alertMsg, Restangular) {
+    $scope.project_id = $stateParams.project_id;
+    Project.getOne($scope, $scope.project_id);
+    Project.getAllGoal($scope, $scope.project_id);
+});
+app.controller('ProjectFileCtrl', function ($scope, $stateParams, Project, FileUploader) {
+    $scope.project_id = $stateParams.project_id;
+    $scope.parent = $stateParams.parent;
+    if ($scope.parent === undefined) {
+        $scope.parent = 0;
+    }
+    Project.getOne($scope, $scope.project_id);
+
+    Project.getFolderTop($scope, $scope.project_id, $scope.parent);
+
+    $scope.folder = $stateParams.folder;
+    $scope.createFolder = function () {
+        if ($scope.folder === undefined) {
+            return false;
+        } else {
+            if ($scope.folder.folder_name === undefined) {
+                return false;
+            }
+        }
+        $scope.folder.project_id = $scope.project_id;
+        $scope.folder.parent = $scope.parent;
+        Project.createFolder($scope, $scope.folder);
+    }
+
+    Project.getFolderParent($scope, $scope.project_id, $scope.parent);
+
+    /*
+     * 上传文件
+     */
+    var uploader = $scope.uploader = new FileUploader({
+            url: 'scripts/controllers/upload.php'
+    })
+
+    // FILTERS
+    uploader.filters.push({
+        name: 'customFilter',
+        fn: function(item /*{File|FileLikeObject}*/, options) {
+            return this.queue.length < 10; 
+        }
+    });
+
+    // CALLBACKS
+
+    uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+        console.info('onWhenAddingFileFailed', item, filter, options);
+    };  
+    uploader.onAfterAddingFile = function(fileItem) {
+        console.info('onAfterAddingFile', fileItem);
+    };  
+    uploader.onAfterAddingAll = function(addedFileItems) {
+        console.info('onAfterAddingAll', addedFileItems);
+    };  
+    uploader.onBeforeUploadItem = function(item) {
+        console.info('onBeforeUploadItem', item);
+    };  
+    uploader.onProgressItem = function(fileItem, progress) {
+        console.info('onProgressItem', fileItem, progress);
+    };  
+    uploader.onProgressAll = function(progress) {
+        console.info('onProgressAll', progress);
+    };  
+    uploader.onSuccessItem = function(fileItem, response, status, headers) {
+        console.info('onSuccessItem', fileItem, response, status, headers);
+    };
+    uploader.onErrorItem = function(fileItem, response, status, headers) {
+        console.info('onErrorItem', fileItem, response, status, headers);
+    };
+    uploader.onCancelItem = function(fileItem, response, status, headers) {
+        console.info('onCancelItem', fileItem, response, status, headers);
+    };
+    uploader.onCompleteItem = function(fileItem, response, status, headers) {
+        if (status == 200) {
+            Project.uploadFile($scope, {"folder_name": fileItem.file.name, "project_id":$scope.project_id, "parent": $scope.parent});
+        }
+        console.info('onCompleteItem', fileItem, response, status, headers);
+    };
+    uploader.onCompleteAll = function() {
+        console.info('onCompleteAll');
+    };
+
+    console.info('uploader', uploader);
+});

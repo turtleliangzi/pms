@@ -1,0 +1,35 @@
+'use strict';
+
+/**
+ * Controller of the permission
+ */
+
+app.controller('PermissionAssignCtrl', function($scope, $stateParams, Permission) {
+
+});
+app.controller('PermissionGroupCtrl', function($scope, $stateParams, Permission) {
+    $scope.group = $stateParams.group;
+    var permissions = new Array();
+    permissions['all'] = false;
+    permissions['add_department'] = false;
+    permissions['add_project'] = false;
+    permissions['audit_project'] = false;
+    permissions['add_group'] = false;
+    permissions['assign_permission'] = false;
+    $scope.changePermission = function (value, param) {
+        permissions[param] = value;
+    }
+    $scope.addGroup = function () {
+        if ($scope.group === undefined) {
+            return false;
+        }
+        if ($scope.group.group_name === undefined) {
+            return false;
+        }
+        $scope.group.permissions = permissions;
+        console.log(permissions);
+        //Permission.addGroup($scope, $scope.group);
+    }
+
+});
+

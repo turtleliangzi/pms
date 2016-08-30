@@ -1,0 +1,79 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">
+    {{departmentInfo.name}}&nbsp;-
+    <span style="font-size:14px;">{{departmentInfo.desc}}</span>
+    <span class="badge bg-info">8人</span>
+  </h3>
+</div>
+<button class="btn btn-addon btn-primary" style="margin:20px;20px;" data-toggle="modal" data-target="#add"><i class="fa fa-plus"></i>新增成员</button>
+<!-- Modal -->
+<form name="form" role="form" class="form-validation">
+  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">新增成员</h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel-body" style="text-align:left">    
+            <div class="form-group">
+              <label>邮箱</label>
+              <input type="email" class="form-control"  ng-model="member.email"  required placeholder="填写成员邮箱">
+            </div>
+            <div class="form-group">
+              <label>角色类型</label>
+              <select class="form-control" ng-model="member.role_type" placeholder="请选择角色类型" required>
+                <option  ng-repeat="role in roleType"  value="{{role.id}}">{{role.type}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>职位</label>
+              <input type="text" class="form-control"  ng-model="member.role"  required placeholder="填写成员角色/职位">
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="submit" class="btn btn-primary" ng-click="addMember()">新建</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="input-group" style="margin-left:20px;margin-right:20px;margin-bottom:20px;background-color:#fff;border-radius:20px;">
+  <span class="input-group-btn">
+    <button type="submit" class="btn no-bg  btn-icon no-shadow no-padder"><i class="ti-search"></i></button>
+  </span>
+  <input type="text" class="form-control no-bg  no-border" placeholder="姓名/邮箱/手机">
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading" style="font-size:20px;">成员列表</div>
+  <table st-table="rowCollectionPage" class="table table-striped">
+    <thead>
+      <tr>
+        <th st-sort="name">姓名</th>
+        <th st-sort="email">邮箱</th>
+        <th st-sort="phone">手机</th>
+        <th st-sort="role">角色</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in memberInfo">
+        <td>{{row.name}}</td>
+        <td>{{row.email}}</td>
+        <td>{{row.phone}}</td>
+        <td>{{row.role}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5" class="text-center">
+          <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7" class="no-margin"></div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

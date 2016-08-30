@@ -1,0 +1,47 @@
+"use.strict";
+
+/*
+ * common service
+ */
+
+app.factory("alertMsg", function ($alert, $location) {
+    return {
+        alert: function ($scope, response, href = '') {
+            if (response.error !== undefined) {
+                if (response.status === 400 || response.status === 401) {
+                    $location.path("/signin");
+                } else {
+                    $alert({
+                        title: 'Error:',
+                        content: response.error,
+                        placement: 'top-right',
+                        type: 'danger',
+                        show: true,
+                        duration: 3,
+                        animation: 'am-fade-and-slide-top',
+                    })
+
+                }
+            } else if (response.status === 200 || response.data !== undefined){
+                if (response.data !== undefined) {
+                    $scope.data = response.data;
+                } else {
+                    $alert({
+                        title: 'Success:',
+                        content: response.success,
+                        placement: 'top-right',
+                        type: 'success',
+                        show: true,
+                        duration: 3,
+                        animation: 'am-fade-and-slide-top',
+                    })
+                    $location.path(href);
+
+                }
+            }
+
+        }
+    }   
+
+
+});

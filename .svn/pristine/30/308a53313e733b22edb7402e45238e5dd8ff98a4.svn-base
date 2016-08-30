@@ -1,0 +1,28 @@
+"use.strict";
+
+/*
+ * Department Service
+ */
+
+
+app.factory("Department", function (Restangular, alertMsg) {
+    return {
+        allDepartment: function ($scope, company, uid) {
+            Restangular.one('department/all/info/', company).one(uid).get().then(function(response) {
+                alertMsg.alert($scope, response, '');
+            })
+
+        },
+        memberDepartment: function ($scope, company, uid) {
+            Restangular.one('department/member/department', company).one(uid).get().then(function(response) {
+                alertMsg.alert($scope, response, '', departmentMember);
+            })
+        },
+        addDepartment: function ($scope, departmentParm) {
+            var department = Restangular.all('department/add');
+            department.post(departmentParm).then(function (response) {
+                alertMsg.alert($scope, response, '/department');
+            })
+        }
+    }
+});

@@ -1,0 +1,50 @@
+"use.strict";
+
+/*
+ * Permission Service
+ */
+
+
+app.factory("Permission", function (Restangular, $location, $alert, alertMsg) {
+    return {
+        addGroup: function ($scope, group) {
+            var permissionRest = Restangular.all('group/add');
+            permissionRest.post(group).then(function (response) {
+                alertMsg.alert(response, '');
+                $("#add").modal('hide');
+                Restangular.one('group/all').get().then(function (response) {
+                    var bool = alertMsg.alert(response, '');
+                    if (bool) {
+                        $scope.groups = response.data;
+                    }
+                })
+            })
+        },
+        getAllGroup: function ($scope) {
+            Restangular.one('group/all').get().then(function (response) {
+                var bool = alertMsg.alert(response, '');
+                if (bool) {
+                    $scope.groups = response.data;
+                }
+            })
+        },
+        getMemberGroup: function ($scope) {
+            Restangular.one('group/member').get().then(function (response) {
+                var bool = alertMsg.alert(response, '');
+                if (bool) {
+                    $scope.memberGroup = response.data;
+                }
+            })
+        },
+        getUserGroup: function ($scope, id) {
+            Restangular.one('user/group/info', id).get().then(function (response) {
+                var bool = alertMsg.alert(response, '');
+                if (bool) {
+                    $scope.userGroup = response.data;
+                    $scope.selectGroup = $scope.userGroup.group_name;
+                }
+            })
+        }
+    }
+});
+

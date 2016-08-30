@@ -1,0 +1,18 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name 
+ * @description
+ * Controller of the signin
+ */
+
+app.controller('SignInCtrl', function($scope, $stateParams, Restangular) {
+    $scope.user = $stateParams.user;
+    $scope.login = function () {
+        var auth = Restangular.all('auth');
+        auth.post($scope.user);
+    }
+
+});
+

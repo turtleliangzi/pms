@@ -1,0 +1,55 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">我的项目</h3>
+</div>
+<div class="p-md">
+  <a ng-repeat="project in projects" class="btn btn-icon btn-rounded btn-{{bgs[$index]}} add-department" ui-sref="ui.project.project_schedule({project_id:project.id})">
+    {{project.name}}
+  </a>
+  <button data-toggle="modal" data-target="#add" class="btn btn-icon btn-rounded btn-default add-department">
+    <i class="fa fa-plus"></i>
+  </button>
+  <!-- Modal -->
+  <form name="form" role="form" class="form-validation">
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">新增项目</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel-body" style="text-align:left">
+              <div class="form-group">
+                <label>项目名</label>
+                <input type="text" class="form-control" ng-model="project.project_name"  required >
+              </div>
+              <div class="form-group">
+                <label>项目类型</label>
+                <input type="text" class="form-control" ng-model="project.project_type"  required >
+              </div>
+              <div class="form-group">
+                <label>项目等级</label>
+                <input type="text" class="form-control" ng-model="project.project_range"  required >
+              </div>
+              <div class="form-group">
+                <label>项目描述</label>
+                <input type="text" class="form-control" ng-model="project.project_desc"  required >
+              </div>
+              <div class="form-group">
+                <label>预估用时</label>
+                <input type="text" class="form-control" ng-model="project.etimated_time"  required >
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="submit" class="btn btn-primary" ng-click="addProject()">新建</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</div>
+

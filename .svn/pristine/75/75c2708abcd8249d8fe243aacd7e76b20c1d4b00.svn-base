@@ -1,0 +1,34 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">用户组管理</h3>
+</div>
+<button class="btn btn-addon btn-primary" style="margin:20px;20px;" data-toggle="modal" data-target="#add"><i class="fa fa-plus"></i>新增用户组</button>
+<!-- Modal -->
+<form name="form" role="form" class="form-validation">
+  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">新增用户组</h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel-body" style="text-align:left">    
+            <div class="form-group">
+              <label>邮箱</label>
+              <input type="email" class="form-control"  ng-model="member.email"  required placeholder="填写成员邮箱">
+            </div>
+            <div class="form-group">
+              <label>职位</label>
+              <input type="text" class="form-control"  ng-model="member.role"  required placeholder="填写成员角色/职位">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="submit" class="btn btn-primary" ng-click="addMember()">新建</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+

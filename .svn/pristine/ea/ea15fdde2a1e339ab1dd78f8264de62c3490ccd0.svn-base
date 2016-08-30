@@ -1,0 +1,10 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{project.name}}-看板</h3>
+</div>
+<div style="padding:20px;">
+  <button class="btn btn-icon btn-default"><i class="fa fa-plus"></i></button>
+  <label>阶段目标:&nbsp;</label>
+  <button type="button" class="btn btn-default" placeholder="请选择阶段"  ng-model="selectedIcon" data-html="1" data-animation="am-flip-x"  ng-options="icon.value as icon.label for icon in icons" bs-select>
+    Action <span class="caret"></span>
+  </button>
+</div>

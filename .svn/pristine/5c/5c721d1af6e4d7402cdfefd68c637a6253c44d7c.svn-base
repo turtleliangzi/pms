@@ -1,0 +1,100 @@
+<div ng-if="company.name == null" class="">
+  <div style="font-size:18px;text-align:center;margin-top:20px;">您还没有加入任何公司</div>
+  <div style="font-size:14px;text-align:center;margin-top:10px;">你可以&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-addon btn-primary" style="font-size:12px;" data-toggle=    "modal" data-target="#add">
+      <i class="fa fa-plus" style="font-size:12px;height:30px;width:30px;line-height:30px;"></i>
+      新建
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form name="form-contact" class="form-validation">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">加入公司</h4>
+            </div>
+            <div class="modal-body">
+              <div class="panel-body" style="text-align:left">    
+                <div class="form-group">
+                  <label>公司代号</label>
+                  <input type="text" class="form-control" ng-model="compny.code"  required >
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="submit" class="btn btn-primary" on-click="add()">加入</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;或&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-addon btn-success" style="font-size:12px;" data-toggle="modal" data-target="#join">
+      <i class="fa fa-plus" style="font-size:12px;height:30px;width:30px;line-height:30px;"></i>
+      加入
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="join" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form name="form-contact" class="form-validation">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">加入公司</h4>
+            </div>
+            <div class="modal-body">
+              <div class="panel-body" style="text-align:left">    
+                <div class="form-group">
+                  <label>公司代号</label>
+                  <input type="text" class="form-control" ng-model="compny.code"  required >
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="submit" class="btn btn-primary" on-click="join()">加入</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div ng-if="company.name != null" class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{company.name}}<span class="label bg-info pos-rlt m-r-xs" style="font-size:12px;margin-left:10px;"><b class="arrow left b-info pull-in"></b>{{company.code}}</span></h3>
+</div>
+<div class="p-md" ng-if="company.name != null">
+  <div class="row" style="">
+    <div class="col-sm-6">
+      <div class="panel panel-success b-t-4x">
+        <div class="panel-heading" style="font-size:18px;">
+          部门数
+        </div>
+        <div class="panel-body" style="font-size:26px;font-weight:bold;text-align:center">
+          1
+        </div>
+        <div class="panel-footer">
+          更新于2016/03/13
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="panel panel-success b-t-4x">
+        <div class="panel-heading" style="font-size:18px;">
+          成员数
+        </div>
+        <div class="panel-body" style="font-size:26px;font-weight:bold;text-align:center">
+          2
+        </div>
+        <div class="panel-footer">
+          更新于2016/03/13
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

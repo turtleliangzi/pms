@@ -1,0 +1,68 @@
+"use.strict";
+
+/*
+ * Project Service
+ */
+
+
+app.factory("Project", function (Restangular, $location, $alert, alertMsg) {
+    return {
+        myProject: function ($scope) {
+            Restangular.one('project/myproject').get().then(function(response) {
+               var bool =  alertMsg.alert(response, '');
+               if (bool) {
+                    $scope.projects = response.data;
+               }
+            })
+        },
+        addProject: function ($scope, project) {
+            var projectRest = Restangular.all('project/add');
+            projectRest.post(project).then(function (response) {
+                alertMsg.alert(response, '/');
+            })
+        },
+        getKindProject: function ($scope, kind) {
+            Restangular.one('project/get', kind).get().then(function (response) {
+                var bool = alertMsg.alert(response, '');
+                if (bool) {
+                    $scope.projects = response.data;
+                }
+            });
+        },
+        audit: function ($scope, params) {
+            var projectRest = Restangular.all('project/audit');
+            projectRest.post(params).then(function (response) {
+                alertMsg.alert(response, '/project_audit');
+            })
+        },
+        distribute: function ($scope, project) {
+            var projectRest = Restangular.all('project/distribute');
+            projectRest.post(project).then(function (response) {
+                alertMsg.alert(response, '/project_audit/1');
+            })
+        },
+        getOne: function ($scope, project_id) {
+            Restangular.one('project/get/one', project_id).get().then(function (response) {
+                var bool = alertMsg.alert(response, '');
+                if (bool) {
+                    $scope.project = response.data;
+                }
+            }) 
+        },
+        addGoal: function ($scope, goal) {
+            var goalRest = Restangular.all('project/add_goal');
+            goalRest.post(goal).then(function (response) {
+                alertMsg.alert(response, '');
+            })
+        },
+        getAllGoal: function ($scope, project_id) {
+            Restangular.one('project/get/goal/all', project_id).get().then(function (response) {
+                var bool = alertMsg.alert(response, '');
+                if (bool) {
+                    return response.data;
+                }
+            })
+        }
+    }
+});
+

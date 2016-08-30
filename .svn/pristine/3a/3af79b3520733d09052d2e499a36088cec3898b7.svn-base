@@ -1,0 +1,75 @@
+'use strict';
+
+/**
+ * Controller of the project
+ */
+
+app.controller('MyProjectCtrl', function($scope, $stateParams, Project) {
+    $scope.project = $stateParams.project;
+
+    $scope.bgs = Array('success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary');
+
+    Project.myProject($scope);
+
+    $scope.addProject = function () {
+        if ($scope.project === undefined) {
+            return;
+        } else {
+            if ($scope.project.project_name === undefined) {
+                return;
+            }
+            if ($scope.project.project_type === undefined) {
+                return;
+            }
+            if ($scope.project.project_range === undefined) {
+                return;
+            }
+            if ($scope.project.project_desc === undefined) {
+                return;
+            }
+            if ($scope.project.etimated_time === undefined) {
+                return;
+            }
+        }
+        Project.addProject($scope, $scope.project);
+    }
+
+});
+
+app.controller('ProjectAuditCtrl', function ($scope, $stateParams, Project) {
+    $scope.kind = $stateParams.kind;
+    if ($scope.kind === undefined || $scope.kind === '') {
+        $scope.kind = 0;
+    }
+    Project.getKindProject($scope, $scope.kind);
+
+    $scope.agree = function(project_id) {
+        var params = {
+            'project_id': project_id ,
+            'status': 1,
+        };
+        Project.agree($scope, params);
+    }
+
+    $scope.getProjectModel = function (project) {
+        $scope.project = project;
+    }
+    
+    $scope.distribute = function(projecct_id) {
+        alert($scope.project);
+        if ($scope.project === undefined) {
+            return;
+        } else {
+            if ($scope.project.project_manager === undefined) {
+                return;
+            }
+            if ($scope.project.product_manager === undefined) {
+                return;
+            }
+        }
+        $scope.project.project_id = project_id;
+        Project.distribute($scope, $scope.project);
+
+    }
+
+});

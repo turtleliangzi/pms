@@ -1,0 +1,10 @@
+'use strict';
+
+/**
+ * Controller of the project
+ */
+
+app.controller('MyProjectCtrl', function($scope, $stateParams, Project) {
+
+});
+

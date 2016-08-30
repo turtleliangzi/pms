@@ -1,0 +1,39 @@
+'use strict';
+
+/**
+ * Controller of the department
+ */
+
+app.controller('DepartmentCtrl', function($scope, $stateParams, Department) {
+    $scope.company = window.localStorage.getItem("company");
+    $scope.name = window.localStorage.getItem("name");
+    $scope.uid = window.localStorage.getItem("uid");
+    $scope.bgs = Array('success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary');
+
+    $scope.department = $stateParams.department;
+
+
+    Department.allDepartment($scope, $scope.company, $scope.uid);
+
+    Department.memberDepartment($scope, $scope.company, $scope.uid);
+
+    $scope.addDepartment = function () {
+        if ($scope.department === undefined) {
+            return;
+        } else {
+            if ($scope.department.department_name === undefined) {
+                return;
+            }
+        }
+        $scope.department.department_creator = $scope.name;
+        $scope.department.company = $scope.company;
+        Department.addDepartment($scope, $scope.department);
+    }
+
+
+});
+
+app.controller("DepartmentOneCtrl", function ($scope, $stateParams, Department) {
+    $scope.department = "技术部";
+});
+

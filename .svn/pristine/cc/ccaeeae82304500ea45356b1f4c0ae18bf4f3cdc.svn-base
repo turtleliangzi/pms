@@ -1,0 +1,116 @@
+<div ng-if="companyInfo.name == null" class="">
+  <div style="font-size:18px;text-align:center;margin-top:20px;">您还没有加入任何公司</div>
+  <div style="font-size:14px;text-align:center;margin-top:10px;">你可以&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-addon btn-primary" style="font-size:12px;" data-toggle="modal" data-target="#add">
+      <i class="fa fa-plus" style="font-size:12px;height:30px;width:30px;line-height:30px;"></i>
+      新建
+    </button>
+    &nbsp;&nbsp;&nbsp;&nbsp;或&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-addon btn-success" style="font-size:12px;" data-toggle="modal" data-target="#join">
+      <i class="fa fa-plus" style="font-size:12px;height:30px;width:30px;line-height:30px;"></i>
+      加入
+    </button>
+    <!-- Modal -->
+    <form name="form" role="form" class="form-validation">
+      <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">新建公司</h4>
+            </div>
+            <div class="modal-body">
+              <div class="panel-body" style="text-align:left">    
+                <div class="form-group">
+                  <label>公司名</label>
+                  <input type="text" class="form-control" ng-change="new(newCompany)" ng-model="newCompany.company_name"  required >
+                </div>
+                  <div class="form-group">
+                    <label>英文名</label>
+                    <input type="text" class="form-control" ng-change="new(newCompany)" ng-model="newCompany.english_name"  required >
+                  </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="submit" class="btn btn-primary" ng-click="addCompany()">新建</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- Modal -->
+    <div class="modal fade" id="join" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form name="form-contact" class="form-validation">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">加入公司</h4>
+            </div>
+            <div class="modal-body">
+              <div class="panel-body" style="text-align:left">    
+                <div class="form-group">
+                  <label>公司代号</label>
+                  <input type="text" class="form-control" ng-change="old(oldCompany)" ng-model="oldCompany.company_code"  required >
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="submit" class="btn btn-primary" ng-click="joinCompany()">加入</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-if="companyInfo.name != null" class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{companyInfo.name}}<span class="label bg-info pos-rlt m-r-xs" style="font-size:12px;margin-left:10px;"><b class="arrow left b-info pull-in"></b>{{companyInfo.code}}</span></h3>
+</div>
+<div class="p-md" ng-if="companyInfo.name != null">
+  <div class="row" style="">
+    <div class="col-sm-6">
+      <div class="panel no-border bg-info">
+        <div class="panel-heading lt text-lt">
+          部门总数
+        </div>
+        <div class="progress progress-xxs no-margin no-radius dk">
+          <div class="progress-bar bg-light lt" style="width:100%"></div>
+        </div>
+        <div class="panel-body p-v-md">
+          <div class="pull-left pull-none-sm p-h text-center m-r m-v-xs">
+            <i class="ti-id-badge fa-4x text-muted"></i>
+          </div>
+          <div class="clear">
+            <div class="text-2x font-bold text-lt">{{departmentCount}}</div>
+            <small class="text-dk">更新于{{departmentDate}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="panel no-border bg-success">
+        <div class="panel-heading lt text-lt">
+          成员总数
+        </div>
+        <div class="progress progress-xxs no-margin no-radius dk">
+          <div class="progress-bar bg-light lt" style="width:100%"></div>
+        </div>
+        <div class="panel-body p-v-md">
+          <div class="pull-left pull-none-sm p-h text-center m-r m-v-xs">
+            <i class="ti-user fa-4x text-muted"></i>
+          </div>
+          <div class="clear">
+            <div class="text-2x font-bold text-lt">{{memberCount}}</div>
+            <small class="text-dk">更新于{{memberDate}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

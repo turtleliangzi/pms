@@ -1,0 +1,67 @@
+'use strict';
+
+/**
+ * Controller of the permission
+ */
+
+app.controller('PermissionAssignCtrl', function($scope, $stateParams, Permission) {
+
+});
+app.controller('PermissionGroupCtrl', function($scope, $stateParams, Permission) {
+    $scope.group = $stateParams.group;
+    var permissions = new Array();
+    permissions['all'] = false;
+    permissions['add_department'] = false;
+    permissions['add_project'] = false;
+    permissions['audit_project'] = false;
+    permissions['add_group'] = false;
+    permissions['assign_permission'] = false;
+    $scope.changePermission = function (value, param) {
+        permissions[param] = value;
+        console.log(permissions);
+    }
+    $scope.addGroup = function () {
+        if ($scope.group === undefined) {
+            return false;
+        }
+        if ($scope.group.group_name === undefined) {
+            return false;
+        }
+        if ($scope.group.permission === undefined) {
+            return false;
+        }
+        if ($scope.group.permission.all === undefined) {
+            permissions['all'] = false;
+        } else {
+            permissions['all'] = true;
+        }
+        if ($scope.group.permission.add_department === undefined) {
+            permissions['add_department'] = false;
+        } else {
+            permissions['add_department'] = true;
+        }
+        if ($scope.group.permission.add_project === undefined) {
+            permissions['add_project'] = false;
+        } else {
+            permissions['add_project'] = true;
+        }
+        if ($scope.group.permission.audit_project === undefined) {
+            permissions['audit_project'] = false;
+        } else {
+            permissions['audit_project'] = true;
+        }
+        if ($scope.group.permission.add_group === undefined) {
+            permissions['add_group'] = false;
+        } else {
+            permissions['add_group'] = true;
+        }
+        if ($scope.group.permission.assign_permission === undefined) {
+            permissions['assign_permission'] = false;
+        } else {
+            permissions['assign_permission'] = true;
+        }
+        console.log(permissions);
+    }
+
+});
+

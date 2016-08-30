@@ -1,0 +1,51 @@
+'use strict';
+
+/**
+ * Controller of the permission
+ */
+
+app.controller('PermissionAssignCtrl', function($scope, $stateParams, Permission) {
+    Permission.getMemberGroup($scope);
+    Permission.getAllGroup($scope);
+    $scope.group = $stateParams.group;
+    $scope.selectedGroup = function (group_id) {
+        $scope.group = $stateParams.group;
+        alert($scope.group);
+        $scope.group.group_id = group_id;
+        alert($scope.group.group_id);
+    }
+
+});
+app.controller('PermissionGroupCtrl', function($scope, $stateParams, Permission) {
+    $scope.group = $stateParams.group;
+    var permissions = new Array();
+    permissions['all'] = false;
+    permissions['add_department'] = false;
+    permissions['add_project'] = false;
+    permissions['audit_project'] = false;
+    permissions['add_group'] = false;
+    permissions['assign_permission'] = false;
+    permissions['check_contacts'] = false;
+    permissions['check_all_departments'] = false;
+    permissions['add_demand'] = false;
+    permissions['check_all_projects'] = false;
+    permissions['edit_group'] = false;
+    permissions['delete_group'] = false;
+    $scope.changePermission = function (value, param) {
+        permissions[param] = value;
+    }
+    $scope.addGroup = function () {
+        if ($scope.group === undefined) {
+            return false;
+        }
+        if ($scope.group.group_name === undefined) {
+            return false;
+        }
+        $scope.group.permissions = {"all":permissions['all'], "add_department":permissions['add_department'], "add_project":permissions['add_project'], "audit_project":permissions['audit_project'], "add_group":permissions['add_group'], "assign_permission":permissions['assign_permission'], "check_contacts":permissions['check_contacts'], "check_all_departments":permissions['check_all_departments'], "add_demand":permissions['add_demand'], "check_all_projects":permissions['check_all_projects'], "edit_group":permissions['edit_group'], "delete_group":permissions['delete_group']};
+        Permission.addGroup($scope, $scope.group);
+    }
+
+    Permission.getAllGroup($scope);
+
+});
+

@@ -1,0 +1,76 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{project.name}}-文件
+    <span ng-if="project.approve_status == 3" class="label bg-success pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-success pull-in"></b>进行中</span>
+    <span ng-if="project.approve_status == 2" class="label bg-warning pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-warning pull-in"></b>待排期</span>
+    <span ng-if="project.approve_status == 4" class="label bg-info pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-info pull-in"></b>上线中</span>
+    <span ng-if="project.approve_status == 5" class="label bg-danger pos-rlt m-r-xs" style="font-size:12px;"><b class="arrow left b-danger pull-in"></b>已结项</span>
+    <button ng-if="project.approve_status == 2" class="btn btn-rounded btn-stroke btn-success" ng-click="dealProject(project.id)">开始</button>
+    <button ng-if="project.approve_status == 3" class="btn btn-rounded btn-stroke btn-success" ng-click="dealProject(project.id)">申请上线</button>
+    <button ng-if="project.approve_status == 4" class="btn btn-rounded btn-stroke btn-warning" ng-click="dealProject(project.id)">结项</button>
+  </h3>
+</div>
+<div class="project-nav">
+  <ul class="nav-list" >
+    <li class="">
+      <a ui-sref="ui.project.project_kanban({project_id:project.id})">任务</a>
+    </li>
+    <li class="nav-active">
+      <a ui-sref="ui.project.project_file({project_id:project.id, parent:parent})">文件</a>
+    </li>
+  </ul>
+</div>
+<div style="padding:10px;width:100%">
+  <div class="project-file">
+    <div class="file-header">
+      <div class="file-box">文件库</div>
+      <div class="btn-group">
+        <button class="text-info btn-file" data-toggle="modal" data-target="#addFolder"><i class="fa fa-plus-circle text-xl"></i>&nbsp;&nbsp;创建文件夹</button>
+        <button class="text-info btn-file" data-toggle="modal" data-target="#uploadFile"><i class="glyphicon glyphicon-upload text-xl"></i>&nbsp;&nbsp;上传文件</button>
+        <!-- Modal -->
+        <form name="form" role="form" class="form-validation">
+          <div class="modal fade" id="addFolder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">创建文件夹</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label>成员邮箱</label>
+                    <input type="email" class="form-control" ng-model="member.email"  required >
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                  <button type="submit" class="btn btn-primary" ng-click="createFolder()">创建</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="file-body">
+      <table st-table="rowCollectionPip"  st-pipe="callServer" class="table table-striped">
+        <thead>
+          <tr>
+            <th>名称</th>
+            <th>大小</th>
+            <th>创建者</th>
+            <th>更新时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="folder in folders">
+            <td><i ng-if="folder.type == 0" class="fa fa-folder text-xl" style="color:#4bb622"></i><i ng-if="folder.type == 1" class="fa fa-file-o text-xl" style="color:#4bb622"></i>&nbsp;&nbsp;{{folder.name}}</td>
+            <td>-</td>
+            <td>{{folder.creator}}</td>
+            <td>{{folder.update_time}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

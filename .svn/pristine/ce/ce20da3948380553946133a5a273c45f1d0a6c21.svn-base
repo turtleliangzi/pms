@@ -1,0 +1,18 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">权限分配</h3>
+</div>
+<table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>姓名</th>
+      <th>邮箱</th>
+      <th>手机号</th>
+      <th>用户组</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in rowCollectionBasic" st-select-row="row">
+    </tr>
+  </tbody>
+</table>

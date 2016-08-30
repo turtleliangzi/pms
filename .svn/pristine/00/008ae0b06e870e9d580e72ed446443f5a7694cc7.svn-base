@@ -1,0 +1,18 @@
+'use strict';
+
+/**
+ * Controller of the permission
+ */
+
+app.controller('PermissionAssignCtrl', function($scope, $stateParams, Permission) {
+
+});
+app.controller('PermissionGroupCtrl', function($scope, $stateParams, Permission) {
+    $scope.group = $stateParams.group;
+    $scope.addGroup = function () {
+        alert($scope.group.permission.all);
+        console.log($scope.group.permission);
+    }
+
+});
+

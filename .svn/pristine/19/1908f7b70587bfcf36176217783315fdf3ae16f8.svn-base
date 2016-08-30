@@ -1,0 +1,27 @@
+'use strict';
+
+/**
+ * Controller of the department
+ */
+
+app.controller('DepartmentCtrl', function($scope, $stateParams, Department) {
+    $scope.company = window.localStorage.getItem("company");
+    $scope.uid = window.localStorage.getItem("uid");
+    $scope.bgs = Array('success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary');
+
+    $scope.department = $stateParams.department;
+
+
+    Department.allDepartment($scope, $scope.company, $scope.uid);
+
+    $scope.addDepartment = function () {
+        if ($scope.department === undefined) {
+            return;
+        } else {
+            alert($scope.department.department_name);
+        }
+    }
+
+
+});
+

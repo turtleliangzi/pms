@@ -1,0 +1,75 @@
+'use strict';
+
+/**
+ * Controller of the permission
+ */
+
+app.controller('PermissionAssignCtrl', function($scope, $stateParams, Permission, userPermission) {
+    userPermission.getUserPermission($scope);
+    Permission.getMemberGroup($scope);
+    Permission.getAllGroup($scope);
+
+    $scope.getPermissionInfo = function (id) {
+        Permission.getUserGroup($scope, id);
+    }
+
+    $scope.changeSelectGroup = function (selectGroup) {
+        $scope.selectGroup = selectGroup;
+    }
+    $scope.changeUserGroup = function (id) {
+        Permission.changeUserGroup($scope, id, $scope.selectGroup);
+    }
+});
+app.controller('PermissionGroupCtrl', function($scope, $stateParams, Permission, userPermission) {
+    userPermission.getUserPermission($scope);
+    $scope.group = $stateParams.group;
+    var permissions = new Array();
+    permissions['all'] = false;
+    permissions['add_department'] = false;
+    permissions['add_department_member'] = false;
+    permissions['add_project'] = false;
+    permissions['audit_project'] = false;
+    permissions['add_group'] = false;
+    permissions['assign_permission'] = false;
+    permissions['check_contacts'] = false;
+    permissions['check_all_departments'] = false;
+    permissions['add_demand'] = false;
+    permissions['check_all_projects'] = false;
+    permissions['edit_group'] = false;
+    permissions['delete_group'] = false;
+    $scope.changePermission = function (value, param) {
+        permissions['all'] = $stateParams.groupInfo.permission.all;
+        permissions['add_department'] = false;
+        permissions['add_department_member'] = false;
+        permissions['add_project'] = false;
+        permissions['audit_project'] = false;
+        permissions['add_group'] = false;
+        permissions['assign_permission'] = false;
+        permissions['check_contacts'] = false;
+        permissions['check_all_departments'] = false;
+        permissions['add_demand'] = false;
+        permissions['check_all_projects'] = false;
+        permissions['edit_group'] = false;
+        permissions['delete_group'] = false;
+        permissions[param] = value;
+        console.log(permissions);
+    }
+    $scope.addGroup = function () {
+        if ($scope.group === undefined) {
+            return false;
+        }
+        if ($scope.group.group_name === undefined) {
+            return false;
+        }
+        $scope.group.permissions = {"all":permissions['all'], "add_department":permissions['add_department'], "add_department_member":permissions['add_department_member'], "add_project":permissions['add_project'], "audit_project":permissions['audit_project'], "add_group":permissions['add_group'], "assign_permission":permissions['assign_permission'], "check_contacts":permissions['check_contacts'], "check_all_departments":permissions['check_all_departments'], "add_demand":permissions['add_demand'], "check_all_projects":permissions['check_all_projects'], "edit_group":permissions['edit_group'], "delete_group":permissions['delete_group']};
+        Permission.addGroup($scope, $scope.group);
+    }
+
+    Permission.getAllGroup($scope);
+
+    $scope.getGroupInfo = function (group_id) {
+        Permission.getGroupInfo($scope, group_id);
+    }
+
+});
+

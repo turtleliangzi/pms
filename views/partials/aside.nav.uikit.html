@@ -1,0 +1,75 @@
+<nav ui-nav>
+  <li class="nav-header h4 m-v-sm">
+    系统功能
+  </li>
+  <ul class="nav">
+    <li ng-class="{active:$state.includes('ui.administration')}">
+      <a>
+        <span class="pull-right text-muted">
+          <i class="fa fa-caret-down"></i>
+        </span>
+        <i class="icon glyphicon glyphicon-briefcase text-lt"></i>
+        <span class="font-normal">行政管理</span>
+      </a>
+      <ul class="nav nav-sub bg">
+        <li ui-sref-active="active">
+          <a ui-sref="ui.administration.company">公司管理</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="ui.administration.department">部门管理</a>
+        </li>
+      </ul>
+    </li>
+    <li ng-class="{active:$state.includes('ui.demand')}">
+      <a>
+        <span class="pull-right text-muted">
+          <i class="fa fa-caret-down"></i>
+        </span>
+        <i class="icon glyphicon glyphicon-font text-lt"></i>
+        <span class="font-normal">需求管理</span>
+      </a>
+      <ul class="nav nav-sub bg">
+        <li ui-sref-active="active">
+          <a ui-sref="ui.demand.myproject">提交需求</a>
+        </li>
+      </ul>
+    </li>
+    <li ng-class="{active:$state.includes('ui.project')}">
+      <a>
+        <span class="pull-right text-muted">
+          <i class="fa fa-caret-down"></i>
+        </span>
+        <i class="icon glyphicon glyphicon-edit text-lt"></i>
+        <span class="font-normal">项目管理</span>
+      </a>
+      <ul class="nav nav-sub bg">
+        <li ui-sref-active="active">
+          <a ui-sref="ui.project.myproject1">项目看板</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="ui.project.myproject2">项目进展</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="ui.project.project_audit">项目审核</a>
+        </li>
+      </ul>
+    </li>
+    <li ng-class="{active:$state.includes('ui.permission')}">
+      <a>
+        <span class="pull-right text-muted">
+          <i class="fa fa-caret-down"></i>
+        </span>
+        <i class="icon glyphicon glyphicon-font text-lt"></i>
+        <span class="font-normal">权限管理</span>
+      </a>
+      <ul class="nav nav-sub bg">
+        <li ui-sref-active="active">
+          <a ui-sref="ui.permission.group">用户组管理</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="ui.permission.assign">权限分配</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

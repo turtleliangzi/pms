@@ -1,0 +1,26 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">所有部门</h3>
+</div>
+<div class="p-md">
+  <!-- <div class="bg-success department">技术部</div> -->
+  <!-- <div class="bg-info department">市场部</div> -->
+  <!-- <div class="bg-info department" style="font-size:20px;">+</div> -->
+  <!-- <div class="add-department">+</div> -->
+  <button class="btn btn-icon btn-rounded btn-success add-department">
+    市场部
+  </button>
+  <button class="btn btn-icon btn-rounded btn-info add-department">
+    技术部
+  </button>
+  <button class="btn btn-icon btn-rounded btn-default add-department">
+    <i class="fa fa-plus"></i>
+  </button>
+</div>
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">你所在的部门</h3>
+</div>
+<div class="p-md">
+  <button class="btn btn-icon btn-rounded btn-info add-department">
+    技术部
+  </button>
+</div>

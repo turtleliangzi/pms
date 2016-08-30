@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>项目管理系统 | Project Management System | PMS </title>
+    <meta name="description" content="pms, 项目管理系统, project management system, 大数据驱动, 技术管理, 高效率, 方便, 协同" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="styles/app.min.css" type="text/css" />
+</head>
+
+<body ng-app="app">
+    <div class="app" ng-class="{'app-header-fixed':app.settings.headerFixed}" ui-view ng-controller="MainCtrl"></div>
+
+    <script src="scripts/app.min.js"></script>
+    <script src="vendor/jquery/restangular.min.js"></script>
+    <script src="vendor/jquery/lodash.min.js"></script>
+
+</body>
+
+</html>

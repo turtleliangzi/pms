@@ -1,0 +1,54 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{project.name}}-需求管理</h3>
+</div>
+<button class="btn btn-addon btn-primary" style="margin:20px;20px;" data-toggle="modal" data-target="#add"><i class="fa fa-plus"></i>新增需求</button>
+<!-- Modal -->
+<form name="form" role="form" class="form-validation">
+  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">新增需求</h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel-body" style="text-align:left">    
+            <div class="form-group">
+              <label>需求标题</label>
+              <input type="text" class="form-control"  ng-model="demand.demand_title"  required placeholder="填写需求标题">
+            </div>
+            <div class="form-group">
+              <label>需求描述</label>
+              <textarea class="form-control" ng-model="demand.demand_desc" placeholder="填写需求描述"></textarea>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="submit" class="btn btn-primary" ng-click="addDemand()">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<ul class="nav nav-lg nav-tabs" ui-nav style="margin-top:10px;">
+  <li ng-if="kind == 1" class="active">
+    <a href="#/ui/demand/demand_audit/1">已批准</a>
+  </li>
+  <li ng-if="kind != 1" class="">
+    <a href="#/ui/demand/demand_audit/1">已批准</a>
+  </li>
+  <li ng-if="kind == 0" class="active">
+    <a href="#/ui/demand/demand_audit/0">待批准</a>
+  </li>
+  <li ng-if="kind != 0" class="">
+    <a href="#/ui/demand/demand_audit/0">待批准</a>
+  </li>
+  <li ng-if="kind == -1" class="active">
+    <a href="#/ui/demand/demand_audit/-1">未批准</a>
+  </li>
+  <li ng-if="kind != -1" class="">
+    <a href="#/ui/demand/demand_audit/-1">未批准</a>
+  </li>
+</ul>

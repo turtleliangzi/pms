@@ -1,0 +1,34 @@
+'use strict';
+
+/**
+ * Controller of the demand
+ */
+
+app.controller('DemandProjectCtrl', function($scope, $stateParams, Project) {
+    $scope.bgs = Array('success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary');
+    Project.myProject($scope);
+
+});
+
+app.controller('DemandCtrl', function($scope, $stateParams, Demand, Project) {
+    $scope.project_id = $stateParams.project_id;
+
+    Project.getOne($scope, $scope.project_id);
+    
+    $scope.demand = $stateParams.demand;
+    $scope.addDemand = function () {
+        if ($scope.demand === undefined) {
+            return false;
+        } else {
+            if ($scope.demand.demand_title === undefined) {
+                return  false;
+            }
+            if ($scope.demand.demand_desc === undefined) {
+                return false;
+            }
+        }
+        $scope.demand.project = $scope.project_id;
+        Demand.addDemand($scope, $scope.demand);
+    }
+
+})

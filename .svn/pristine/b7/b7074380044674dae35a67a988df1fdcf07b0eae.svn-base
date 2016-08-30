@@ -1,0 +1,107 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">{{project.name}}-看板</h3>
+</div>
+<div style="padding:20px;height:70px;width:100%;position:relative">
+  <label>阶段目标:&nbsp;</label>
+  <button type="button" class="btn btn-default" placeholder="请选择阶段"  ng-model="selectedGoal" data-html="1" data-animation="am-flip-x"  ng-options="goal.id as goal.name for goal in goals" bs-select>
+    Action <span class="caret"></span>
+  </button>
+  <button class="btn btn-icon btn-default" data-toggle="modal" data-target="#addGoal"><i class="fa fa-plus"></i></button>
+  <span style="position:absolute;top:25px;right:20px;cursor:pointer" data-template="views/ui/project/project_member.html" data-animation="am-slide-right aside-open-backdrop" bs-aside="aside" data-html="true" data-container="body">
+    <i class="fa fa-users text-success text-lg"></i>&nbsp;{{memberLength}}人 
+  </span>
+  <!-- Modal -->
+  <form name="form" role="form" class="form-validation">
+    <div class="modal fade" id="addGoal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">新增阶段目标</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel-body" style="text-align:left">    
+              <div class="form-group">
+                <label>阶段名</label>
+                <input type="text" class="form-control" ng-model="goal.goal_name"  required >
+              </div>
+              <div class="form-group">
+                <label>权重</label>
+                <input type="text" class="form-control" ng-model="goal.goal_weight"  required  placeholder="0.3">
+              </div>
+              <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+                <label class="control-label">开始时间</label>
+                <input type="text" class="form-control" ng-model="goal.start_time" data-date-format="yyyy-MM-dd" data-date-type="string"  data-autoclose="true"  data-min-date="today" data-max-date="{{goal.etimated_end_time}}"  data-autoclose="1" name="date2" bs-datepicker>
+              </div>
+              <div class="form-group" ng-class="{'has-error': datepickerForm.date3.$invalid}">
+                <label class="control-label">预计结束时间</label>
+                <input type="text" class="form-control" ng-model="goal.etimated_end_time" data-date-format="yyyy-MM-dd" data-date-type="string"  data-autoclose="true"  data-min-date="{{goal.start_time}}" placement="top-left" useNative="true"  data-autoclose="1" name="date3" bs-datepicker>
+              </div>
+              <div class="form-group">
+                <label>执行顺序</label>
+                <input type="text" class="form-control" ng-model="goal.goal_order"  required  placeholder="1">
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="submit" class="btn btn-primary" ng-click="addGoal(project.id)">新建</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- Modal -->
+  <form name="form" role="form" class="form-validation">
+    <div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">新增项目成员</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel-body" style="text-align:left">    
+              <div class="form-group">
+                <label>成员邮箱</label>
+                <input type="email" class="form-control" ng-model="member.email"  required >
+              </div>
+              <div class="form-group">
+                <label>担任角色</label>
+                <input type="text" class="form-control" ng-model="member.project_role"  required  placeholder="">
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="submit" class="btn btn-primary" ng-click="addMember(project.id)">新增</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div style="width:100%;height:400px;padding:10px;">
+  <div class="kanban">
+    <div class="kanban-header">
+      待处理
+    </div>
+    <div class="add-task">
+      <button class="btn btn-stroke no-border btn-info"><i class="fa fa-plus btn-rounded" style="border:1px solid #2772ee;margin-right:10px;padding-top:5px;padding-bottom:5px;padding-left:6px;padding-right:6px;"></i>添加任务</button>
+    </div>
+  </div>
+  <div class="kanban">
+    <div class="kanban-header">
+      进行中
+    </div>
+    
+  </div>
+  <div class="kanban">
+    <div class="kanban-header">
+      已完成
+    </div>
+    
+  </div>
+</div>

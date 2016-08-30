@@ -1,0 +1,43 @@
+<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header" >
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h4 class="aside-title" >项目成员</h4>
+      </div>
+      <div class="aside-body">
+        <button class="btn btn-addon btn-success" data-toggle="modal" data-target="#addMember"><i class="fa fa-plus"></i>新增成员</button>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href class="pull-left w-thumb m-r b-b b-b-2x b-success"><img src="images/a1.jpg" class="img-responsive"></a>
+            <div class="clear">
+              <a href class="font-bold block">Jonathan Doe</a>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            </div>
+          </li>
+          <li class="list-group-item">
+            <a href class="pull-left w-thumb m-r b-b b-b-2x b-success"><img src="images/a2.jpg" class="img-responsive"></a>
+            <div class="clear">
+              <a href class="font-bold block">Jack Michale</a>
+              Sectetur adipiscing elit
+            </div>
+          </li>
+          <li class="list-group-item">
+            <a href class="pull-left w-thumb m-r b-b b-b-2x b-warning"><img src="images/a3.jpg" class="img-responsive"></a>
+            <div class="clear">
+              <a href class="font-bold block">Jessi</a>
+              Sectetur adipiscing elit
+            </div>
+          </li>
+          <li class="list-group-item">
+            <a href class="pull-left w-thumb m-r b-b b-b-2x"><img src="images/a4.jpg" class="img-responsive"></a>
+            <div class="clear">
+              <a href class="font-bold block">Sodake</a>
+              Vestibulum ullamcorper sodales nisi nec condimentum
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

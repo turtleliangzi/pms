@@ -1,0 +1,21 @@
+.department {
+    height:100px;
+    width:100px;
+    text-align:center;
+    border-radius:100px;
+    line-height:100px;
+    color:#fff;
+    font-weight:bold;
+    display:inline-block;
+    margin-left:20px;
+}
+.add-department {
+    height:100px;
+    width:100px;
+    border-radius:100px;
+    border:1px dashed #fff;
+    font-size:40px;
+    margin-left:20px;
+    text-align:center;
+    line-height:100px;
+}

@@ -1,0 +1,180 @@
+'use strict';
+
+/**
+ * Controller of the project
+ */
+
+app.controller('MyProjectCtrl', function($scope, $stateParams, Project) {
+    $scope.project = $stateParams.project;
+
+    $scope.bgs = Array('success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary','success','info','danger','primary');
+
+    Project.myProject($scope);
+
+    $scope.addProject = function () {
+        if ($scope.project === undefined) {
+            return;
+        } else {
+            if ($scope.project.project_name === undefined) {
+                return;
+            }
+            if ($scope.project.project_type === undefined) {
+                return;
+            }
+            if ($scope.project.project_range === undefined) {
+                return;
+            }
+            if ($scope.project.project_desc === undefined) {
+                return;
+            }
+            if ($scope.project.etimated_time === undefined) {
+                return;
+            }
+        }
+        Project.addProject($scope, $scope.project);
+    }
+
+});
+
+app.controller('ProjectAuditCtrl', function ($scope, $stateParams, Project) {
+    $scope.kind = $stateParams.kind;
+    if ($scope.kind === undefined || $scope.kind === '') {
+        $scope.kind = 0;
+    }
+    Project.getKindProject($scope, $scope.kind);
+
+    $scope.audit = function(project_id, status) {
+        var params = {
+            'project_id': project_id ,
+            'status': status,
+        };
+        Project.audit($scope, params);
+    }
+
+    $scope.getProjectModel = function (project) {
+        $scope.project = project;
+    }
+    
+    $scope.distribute = function(project_id) {
+        if ($scope.project === undefined) {
+            return;
+        } else {
+            if ($scope.project.project_manager === undefined) {
+                return;
+            }
+            if ($scope.project.product_manager === undefined) {
+                return;
+            }
+        }
+        $scope.project.project_id = project_id;
+        Project.distribute($scope, $scope.project);
+
+    }
+
+});
+
+app.controller('ProjectKanbanCtrl', function ($scope, $stateParams, Project, alertMsg, Restangular) {
+    $scope.project_id = $stateParams.project_id;
+
+    // 获取所有阶段目标
+    Restangular.one('project/get/goal/all', $scope.project_id).get().then(function (response) {
+        var bool = alertMsg.alert(response, '');
+        if (bool) {
+            $scope.goals = response.data;
+            $scope.selectedGoal = $scope.goals[0]['id'];
+            Project.getUndoTask($scope, $scope.project_id, $scope.selectedGoal, 0);
+            Project.getDoingTask($scope, $scope.project_id, $scope.selectedGoal, 1);
+            Project.getDoneTask($scope, $scope.project_id, $scope.selectedGoal, 2);
+        }
+    })
+
+    $scope.changeGoal = function (changeGoal) {
+        alert(changeGoal);
+    }
+
+    $scope.goal = $stateParams.goal;
+    $scope.addGoal = function (project_id) {
+        if ($scope.goal === undefined) {
+            return;
+        } else {
+            if ($scope.goal.goal_name === undefined) {
+                return;
+            }
+            if ($scope.goal.goal_weight === undefined) {
+                return;
+            }
+            if ($scope.goal.start_time === undefined) {
+                return;
+            }
+            if ($scope.goal.etimated_end_time === undefined) {
+                return;
+            }
+            if ($scope.goal.goal_order === undefined) {
+                return;
+            }
+        }
+        $scope.goal.project_id = project_id;
+        Project.addGoal($scope, $scope.goal);
+    }
+
+    Project.getOne($scope, $scope.project_id);
+
+    $scope.member = $stateParams.member;
+    $scope.addMember = function (project_id) {
+        if ($scope.member === undefined) {
+            return;
+        } else {
+            if ($scope.member.email === undefined) {
+                return;
+            }
+            if ($scope.member.project_role === undefined) {
+                return;
+            }
+        }
+        $scope.member.project_id = project_id;
+        Project.addMember($scope, $scope.member);
+    } 
+
+    Project.getMember($scope, $scope.project_id);
+
+    $scope.task = $stateParams.task;
+    $scope.addTask = function () {
+        if ($scope.task === undefined) {
+            return;
+        } else {
+            if ($scope.task.task_name === undefined) {
+                return;
+            }
+            if ($scope.task.task_weight === undefined) {
+                return;
+            }
+            if ($scope.task.etimated_time === undefined) {
+                return;
+            }
+            if ($scope.task.task_priority === undefined) {
+                return;
+            }
+            if ($scope.task.task_difficulty === undefined) {
+                return;
+            }
+            if ($scope.task.task_type === undefined) {
+                return;
+            }
+        }
+        $scope.task.goal = $scope.selectedGoal;
+        Project.addTask($scope, $scope.task);
+    }
+
+    $scope.taskDetail = function (task_id) {
+        Project.getTaskOne($scope, $scope.selectedGoal,  task_id);
+    }
+
+    $scope.receiveTask = function (task_id) {
+        Project.receiveTask($scope, $scope.selectedGoal, task_id);
+    }
+
+    $scope.completeTask = function (task_id) {
+        Project.completeTask($scope, $scope.selectedGoal, task_id);
+    }
+
+});

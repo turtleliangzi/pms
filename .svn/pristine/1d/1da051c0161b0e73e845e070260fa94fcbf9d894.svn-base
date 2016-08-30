@@ -1,0 +1,49 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">所有部门</h3>
+</div>
+<div class="p-md">
+  <a ng-repeat="department in allDepartment" class="btn btn-icon btn-rounded btn-{{bgs[$index]}} add-department" ui-sref="ui.administration.department_info({department_id:department.id})">
+    {{department.name}}
+  </a>
+  <button data-toggle="modal" data-target="#add" class="btn btn-icon btn-rounded btn-default add-department">
+    <i class="fa fa-plus"></i>
+  </button>
+  <!-- Modal -->
+  <form name="form" role="form" class="form-validation">
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">新建部门</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel-body" style="text-align:left">    
+              <div class="form-group">
+                <label>部门名</label>
+                <input type="text" class="form-control"  ng-model="department.department_name"  required placeholder="填写部门名">
+              </div>
+                <div class="form-group">
+                  <label>部门描述</label>
+                  <textarea class="form-control" row="5" ng-model="department.department_desc" placeholder="填写部门描述"></textarea>
+                </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="submit" class="btn btn-primary" ng-click="addDepartment()">新建</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">你所在的部门</h3>
+</div>
+<div class="p-md">
+  <button ng-repeat="department in memberDepartment" class="btn btn-icon btn-rounded btn-{{bgs[$index]}} add-department">
+    {{department.name}}
+  </button>
+</div>

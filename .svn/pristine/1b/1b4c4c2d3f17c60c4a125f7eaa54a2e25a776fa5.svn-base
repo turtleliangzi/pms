@@ -1,0 +1,19 @@
+"use.strict";
+
+/*
+ * Demand Service
+ */
+
+
+app.factory("Demand", function (Restangular, $location, $alert, alertMsg) {
+    return {
+        addDemand: function ($scope, demand) {
+            var demandRest = Restangular.all('demand/add');
+            demandRest.post(demand).then(function (response) {
+                alertMsg.alert(response, '');
+                $("#add").modal('hide');
+            })
+        },
+    }
+});
+

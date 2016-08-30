@@ -1,0 +1,12 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt">
+  <h3 class="no-margin">我的项目</h3>
+</div>
+<div class="p-md">
+  <a ng-repeat="department in memberDepartment" class="btn btn-icon btn-rounded btn-{{bgs[$index]}} add-department" ui-sref="ui.administration.department-info({department_id:department.id})">
+    {{department.name}}
+  </a>
+  <button data-toggle="modal" data-target="#add" class="btn btn-icon btn-rounded btn-default add-department">
+    <i class="fa fa-plus"></i>
+  </button>
+</div>
+

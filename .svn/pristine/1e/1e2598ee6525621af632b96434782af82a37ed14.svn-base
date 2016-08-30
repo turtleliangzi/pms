@@ -1,0 +1,47 @@
+"use.strict";
+
+/*
+ * Company Service
+ */
+
+
+app.factory("Company", function (Restangular, $location, $alert, alertMsg) {
+    return {
+        info: function ($scope) {
+            Restangular.one('company/info').get().then(function(response) {
+               var bool =  alertMsg.alert(response, '');
+               if (bool) {
+                    $scope.companyInfo = response.data;
+               }
+            })
+        },
+        add: function ($scope, newCompany) {
+            var company = Restangular.all('company/add');
+            company.post(newCompany).then(function (response) {
+                alertMsg.alert(response, '');
+                $("#add").modal('hide');
+                Restangular.one('company/info').get().then(function(response) {
+                    var bool =  alertMsg.alert(response, '');
+                    if (bool) {
+                        $scope.companyInfo = response.data;
+                    }
+                })
+            })
+        },
+        join: function ($scope, oldCompany) {
+            var company = Restangular.all('company/join');
+            company.post(oldCompany).then(function (response) {
+                alertMsg.alert(response, '');
+                $("#join").modal('hide');
+                Restangular.one('company/info').get().then(function(response) {
+                    var bool =  alertMsg.alert(response, '');
+                    if (bool) {
+                        $scope.companyInfo = response.data;
+                    }
+                })
+
+            })
+        }
+    }
+});
+

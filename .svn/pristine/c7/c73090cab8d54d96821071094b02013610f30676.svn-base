@@ -1,0 +1,36 @@
+"use.strict";
+
+/*
+ * Company Service
+ */
+
+
+app.factory("Company", function (Restangular, $location, $alert) {
+    return {
+        info: function ($scope, company_code) {
+            var company = Restangular.one('company/info');
+            company.get(company_code).then(function(response) {
+                alert(response);
+            })
+        },
+        signUp: function ($scope, user) {
+            var auth = Restangular.all('auth/register');
+            auth.post(user).then(function (response) {
+                if (response.token !== undefined) {
+                    window.localStorage.setItem('token', response.token);
+                    $location.path('/');
+                } else {
+                    $alert({
+                        title: 'Error:',
+                        content: response.error,
+                        placement: 'top-right',
+                        type: 'danger',
+                        show: true,
+                        duration: 3,
+                        animation: 'am-fade-and-slide-top',
+                    })
+                }
+            })
+        }
+    }
+});

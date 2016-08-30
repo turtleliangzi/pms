@@ -1,0 +1,22 @@
+<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header" >
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h4 class="aside-title" >项目成员</h4>
+      </div>
+      <div class="aside-body">
+        <button ng-if="isProjectManager == true" class="btn btn-addon btn-success" data-toggle="modal" data-target="#addMember"><i class="fa fa-plus"></i>新增成员</button>
+        <ul class="" style="margin:0px;padding:0px;">
+          <li class="" style="list-style:none;margin-top:10px;" ng-repeat="member in members">
+            <a href class="pull-left w-thumb m-r b-b b-b-2x b-success"><img src="images/a{{$index+1}}.jpg" class="img-responsive"></a>
+            <div class="clear">
+              <a href class="font-bold block">{{member.name}}——{{member.role}}</a>
+              {{member.email}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

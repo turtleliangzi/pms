@@ -1,0 +1,51 @@
+'use strict';
+
+/**
+ * @signin function
+ * @email 
+ * @password
+ * Controller of the signin
+ */
+
+app.controller('SignInCtrl', function($scope, $stateParams, Auth) {
+    $scope.user = $stateParams.user;
+    if ($scope.user === undefined) {
+        alert($scope.user);
+        return;
+    }
+    if ($scope.user !== undefined) {
+        if ($scope.user.email === null || $scope.user.email === '') {
+            alert($scope.user.email);
+            return;
+        }
+        if ($scope.user.passwrd === null || $scope.user.password === '') {
+            alert($scope.user.password);
+            return;
+        }
+        alert($scope.user);
+    }
+    $scope.login = function () {
+        alert($scope.user);
+        Auth.signIn($scope, $scope.user);
+    }
+
+
+});
+
+/*
+ * @signup function
+ * @name
+ * @emial
+ * @password
+ * @repeat password
+ * Controller of the signup
+ */
+
+app.controller('SignUpCtrl', function($scope, $stateParams, Auth) {
+    $scope.user = $stateParams.user;
+    $scope.register = function () {
+        Auth.signUp($scope, $scope.user);
+    }
+
+
+});
