@@ -4,15 +4,15 @@
  * Controller of the company
  */
 
-app.controller('CompanyCtrl', function($scope, $stateParams, Company, userPermission) {
+app.controller("CompanyCtrl", function($scope, $stateParams, Company, userPermission) {
     userPermission.getUserPermission($scope);
-    $scope.company = window.localStorage.getItem('company');
-    $scope.uid = window.localStorage.getItem('uid');
+    $scope.company = window.localStorage.getItem("company");
+    $scope.uid = window.localStorage.getItem("uid");
     if ($scope.company !== "null") {
         Company.info($scope);
         Company.departmentCount($scope);
         Company.memberCount($scope);
-        Company.companyMember($scope, 'null');
+        Company.companyMember($scope, "null");
     }
     $scope.new = function(newCompany) {
         $scope.newCompany = newCompany;
