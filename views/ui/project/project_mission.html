@@ -1,0 +1,31 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th class="text-center">任务详情</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>任务名：{{mission.name}}</td>
+		</tr>
+		<tr>
+			<td>任务类型：{{mission.type}}</td>
+		</tr>
+		<tr>
+			<td>任务估时：{{mission.etimated_time}}天</td>
+		</tr>
+		<tr>
+			<td>任务难度：{{mission.difficulty}}</td>
+		</tr>
+		<tr>
+			<td>任务优先级：{{mission.priority}}</td>
+		</tr>
+		<tr>
+			<td>任务权重：{{mission.weight}}</td>
+		</tr>
+		<tr>
+			<td>任务描述：{{mission.desc}}</td>
+		</tr>
+	</tbody>
+</table>
+<button class="btn btn-primary center-block" style="width:200px;margin-top:30px;" ng-click="receiveOneTask()">领取任务</button>
